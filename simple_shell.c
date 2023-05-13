@@ -5,7 +5,7 @@
  * Return: return 0 if succes
  */
 
-int main(void)
+int main(int argc, char *argv[])
 {
 	int mode = 1;
 	char str[] = "#cisfun$ ";
@@ -13,6 +13,7 @@ int main(void)
 	size_t bufsize = 1024;
 	ssize_t read;
 	char *tokens;
+	pid_t pid;
 
 	buffer = malloc(bufsize * sizeof(char));
 	{
@@ -20,9 +21,9 @@ int main(void)
 		exit(1);
 	}
 
-	while (mode)
+	while (mode == 1)
 	{
-		mode r= isatty(STDIN_FILENO);
+		mode = isatty(STDIN_FILENO);
 		if (mode == 1)
 		{
 			write(STOUT_FILENO, str, _strlen(str));
@@ -34,7 +35,26 @@ int main(void)
 			exit (2);
 		}
 		buffer(_strlen(buffer) - 1) = '\0';
-		tokens =gettoks(buffer);
+		tokens = gettoks(buffer);
+	}
+	if (_strncmp("exit", tokens[0], 4) == 0)
+	{
+		exit(1);
+	}
+	pid = fork();
+	if (!pid)
+	{
+		if(exceve(argv[0], argv, NULL) == -1)
+		{
+			perror("Error");
+			exit(1);
+		}
+		else
+		{
+			wait();
+		}
+	}
+
 
 
 
