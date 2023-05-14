@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <>
+#include <stddef.h>
 
 #define MAX 9
 
@@ -17,5 +17,6 @@ int _strlen(char *s);
 char *gettoks(char *str);
 int main(int argc, char *argv[]);
 int _strncmp(const char *s1, const char *s2, size_t n);
+size_t _strcspn(const char *s1, const char *s2);
 
 #endif
