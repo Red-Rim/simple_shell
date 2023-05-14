@@ -15,14 +15,9 @@ char *gettoks(char *str)
 
 	while (token != NULL)
 	{
-<<<<<<< HEAD
 		toks[i] = (char*) malloc(_strlen(token) + 1);
-		strcpy(toks[i], token);
-=======
 		char *toks = ((char*) malloc(_strlen(token) + 1));
-
 		strcpy(toks, token);
->>>>>>> 5feb1211d13802961f847bdf629df0761e6926a2
 		token = strtok(NULL, deliminer);
 		i++;
 	}

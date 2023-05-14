@@ -7,6 +7,8 @@
 #include <unistd.h>
 #include <>
 
+#define MAX 9
+
 /*Red-Rim & Fatimazahraker*/
 
 int _putchar(char c);
