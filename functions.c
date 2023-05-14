@@ -73,3 +73,30 @@ int _strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
+
+/*-------------------_strcspn-------------------*/
+
+/**
+ * _strcspn - computes the length of the initial segment of s1 that consists
+ * entirely of characters not contained in s2
+ * @s1: the string to serch
+ * @s2: the string containing the characters to match
+ * Return: the length of the initial segment of s1 that consists entirely of
+ * characters not contained in s2
+ */
+size_t _strcspn(const char *s1, const char *s2)
+{
+	const char *p1, *p2;
+
+	for (p1 = s1; *p1 != '\0'; p1++)
+	{
+		for (p2 = s2; *p2 != '\0'; p2++)
+		{
+			if (*p1 == *p2)
+			{
+				return ((size_t)(p1 - s1));
+			}
+		}
+	}
+	return ((size_t)(p1 - s1));
+}
