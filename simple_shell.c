@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 	char *buffer;
 	size_t bufsize = 1024;
 	ssize_t read;
-	char *tokens;
+	char **cmd;
 	pid_t pid;
 
 	buffer = malloc(bufsize * sizeof(char));
@@ -34,25 +34,36 @@ int main(int argc, char *argv[])
 			perror("failled to read");
 			exit (2);
 		}
-		buffer(_strlen(buffer) - 1) = '\0';
-		tokens = gettoks(buffer);
+		buffer[_strcspn(buffer, "\n")] = '\0';
+		cmd = gettoks(buffer);
 	}
-	if (_strncmp("exit", tokens[0], 4) == 0)
+	if (_strncmp("exit", cmd[0], 4) == 0)
 	{
 		exit(1);
 	}
 	pid = fork();
-	if (!pid)
+	if (PID == -1)
 	{
-		if(exceve(argv[0], argv, NULL) == -1)
+		perror("fork failed");
+		free (buffer);
+		free(cmd);
+		exit(EXIT_FAILURE);
+	}
+	else if(pid == 0)
+	{
+		if (execve(cmd[0], cmd, NULL) == -1)
 		{
-			perror("Error");
-			exit(1);
+			perror("execeve failed");
+			free(cmd);
+			free(buffer);
+			printf("./shell: No such file or directory")
+			exit(EXIT_FAILURE);
 		}
-		else
-		{
-			wait();
-		}
+	}
+	else 
+	{
+		wait();
+	}
 	}
 
 
