@@ -51,3 +51,25 @@ int _putstr(char *str)
 	}
 	return (i);
 }
+
+/*-----------------_strncmp---------------------*/
+
+/**
+ * _strncmp - compares two strings up to a specified num of characters
+ * @s1: first string to compare
+ * @s2: second string to compare
+ * @n: max numb of characters to compare
+ * Return: an integer less than, equal to, or greater than zero if s1
+ * is found, respectively, to be less than, to match, or be greater than s2
+ */
+int _strncmp(const char *s1, const char *s2, size_t n)
+{
+	for (size_t i = 0; i < n && s1[i] != '\0' && s2[i] != '\0'; i++)
+	{
+		if (s1[i] != s2[i])
+		{
+			return (s1[i] - s2[i]);
+		}
+	}
+	return (0);
+}

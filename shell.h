@@ -16,5 +16,6 @@ int _putstr(char *str);
 int _strlen(char *s);
 char *gettoks(char *str);
 int main(int argc, char *argv[]);
+int _strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

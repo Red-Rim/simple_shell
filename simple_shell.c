@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 	pid = fork();
-	if (PID == -1)
+	if (pid == -1)
 	{
 		perror("fork failed");
 		free (buffer);
