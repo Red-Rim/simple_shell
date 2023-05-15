@@ -37,9 +37,9 @@ int main(int argc, char *argv[])
 		read = getline(&buffer, &bufsize, stdin);
 		if (read == -1)
 		{
-			perror("failled to read");
 			free(buffer);
-			exit(EXIT_FAILURE);
+			free(cmd);
+			exit(0); /*exit on "EOF" */
 		}
 		buffer[_strcspn(buffer, "\n")] = '\0';
 		cmd = gettoks(buffer);
