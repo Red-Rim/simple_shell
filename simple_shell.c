@@ -2,6 +2,8 @@
  /*Red-Riml & Fatimazahraker*/
 /**
  * main - simlpe shell (UNIX command line interpreter)
+ * @argc: number of command-line arguments
+ * @argv: array of command-line argument strings
  * Return: return 0 if succes
  */
 
@@ -32,7 +34,7 @@ int main(int argc, char *argv[])
 		if (read == -1)
 		{
 			perror("failled to read");
-			exit (2);
+			exit(2);
 		}
 		buffer[_strcspn(buffer, "\n")] = '\0';
 		cmd = gettoks(buffer);
@@ -45,11 +47,11 @@ int main(int argc, char *argv[])
 	if (pid == -1)
 	{
 		perror("fork failed");
-		free (buffer);
+		free(buffer);
 		free(cmd);
 		exit(EXIT_FAILURE);
 	}
-	else if(pid == 0)
+	else if (pid == 0)
 	{
 		if (execve(cmd[0], cmd, NULL) == -1)
 		{
@@ -60,7 +62,7 @@ int main(int argc, char *argv[])
 			exit(EXIT_FAILURE);
 		}
 	}
-	else 
+	else
 	{
 		wait();
 	}
