@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 			exit(2);
 		}
 		buffer[_strcspn(buffer, "\n")] = '\0';
-		*cmd = gettoks(buffer);
+		cmd = gettoks(buffer);
 
 	if (_strncmp("exit", cmd[0], 4) == 0)
 		exit(1);
