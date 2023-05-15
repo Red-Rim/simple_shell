@@ -35,8 +35,8 @@ int _putchar(char c)
 /**
  * _putstr - prints a string to stdout
  * @str: the string to be printed
- * Return: the numb of characters printed
- */
+ * Return: void
+*/
 int _putstr(char *str)
 {
 	int i = 0;
@@ -49,7 +49,7 @@ int _putstr(char *str)
 		_putchar(str[i]);
 		i++;
 	}
-	return (i);
+	return (0);
 }
 
 /*-----------------_strncmp---------------------*/
@@ -64,7 +64,9 @@ int _putstr(char *str)
  */
 int _strncmp(const char *s1, const char *s2, size_t n)
 {
-	for (size_t i = 0; i < n && s1[i] != '\0' && s2[i] != '\0'; i++)
+	size_t i;
+
+	for (i = 0; i < n && s1[i] != '\0' && s2[i] != '\0'; i++)
 	{
 		if (s1[i] != s2[i])
 		{

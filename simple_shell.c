@@ -38,13 +38,18 @@ int main(int argc, char *argv[])
 		if (read == -1)
 		{
 			perror("failled to read");
-			exit(2);
+			free(buffer);
+			exit(EXIT_FAILURE);
 		}
 		buffer[_strcspn(buffer, "\n")] = '\0';
 		cmd = gettoks(buffer);
 
 	if (_strncmp("exit", cmd[0], 4) == 0)
-		exit(1);
+	{
+		free(buffer);
+		free(cmd);
+		exit(0);
+	}
 
 	pid = fork();
 	if (pid == -1)
@@ -56,17 +61,30 @@ int main(int argc, char *argv[])
 	}
 	else if (pid == 0)
 	{
+		if (access(cmd[0], F_OK) == 0)
+		{
 		if (execve(cmd[0], cmd, NULL) == -1)
 		{
 			perror("execeve failed");
 			free(cmd);
 			free(buffer);
-			_putstr("./shell: No such file or directory");
+			_putstr("./shell: No such file or directory\n");
+			exit(EXIT_FAILURE);
+		}
+		}
+		else
+		{
+			_putstr("./shell: No such file or directory\n");
+			free(cmd);
+			free(buffer);
 			exit(EXIT_FAILURE);
 		}
 	}
 	else
+	{
 		wait(&status);
+		free(cmd);
+	}
 	}
 	return (0);
 }
