@@ -6,6 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stddef.h>
+#include <sys/wait.h>
 
 #define MAX 9
 

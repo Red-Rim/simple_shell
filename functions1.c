@@ -8,9 +8,9 @@
 
 char **gettoks(char *str)
 {
-	int i;
+	int i = 0;
 	const char *deliminer[] = " ";
-	char **toks = malloc((MAX + 1) * sizeof(char *));
+	char **toks = malloc((MAX + 1) * sizeof(char **));
 	char *token = strtok(str, deliminer);
 
 	while (token != NULL && i < MAX)
@@ -25,4 +25,3 @@ char **gettoks(char *str)
 	return (toks);
 
 }
-

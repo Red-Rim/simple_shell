@@ -16,20 +16,24 @@ int main(int argc, char *argv[])
 	ssize_t read;
 	char **cmd;
 	pid_t pid;
+	int status;
 
-	buffer = malloc(bufsize * sizeof(char));
-	{
-		perror("allocation failed");
-		exit(1);
-	}
+	(void)argc;
+	(void)argv;
 
 	while (mode == 1)
 	{
 		mode = isatty(STDIN_FILENO);
 		if (mode == 1)
+			write(STDOUT_FILENO, str, _strlen(str));
+
+		buffer = malloc(bufsize * sizeof(char));
+		if (buffer == NULL)
 		{
-			write(STOUT_FILENO, str, _strlen(str));
+			perror("allocation failed");
+			exit(1);
 		}
+
 		read = getline(&buffer, &bufsize, STDIN_FILENO);
 		if (read == -1)
 		{
@@ -37,12 +41,11 @@ int main(int argc, char *argv[])
 			exit(2);
 		}
 		buffer[_strcspn(buffer, "\n")] = '\0';
-		cmd = gettoks(buffer);
-	}
+		*cmd = gettoks(buffer);
+
 	if (_strncmp("exit", cmd[0], 4) == 0)
-	{
 		exit(1);
-	}
+
 	pid = fork();
 	if (pid == -1)
 	{
@@ -58,17 +61,12 @@ int main(int argc, char *argv[])
 			perror("execeve failed");
 			free(cmd);
 			free(buffer);
-			printf("./shell: No such file or directory")
+			_putstr("./shell: No such file or directory");
 			exit(EXIT_FAILURE);
 		}
 	}
 	else
-	{
-		wait();
+		wait(&status);
 	}
-	}
-
-
-
-
-
+	return (0);
+}
