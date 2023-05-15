@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 			exit(1);
 		}
 
-		read = getline(&buffer, &bufsize, STDIN_FILENO);
+		read = getline(&buffer, &bufsize, stdin);
 		if (read == -1)
 		{
 			perror("failled to read");
