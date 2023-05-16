@@ -16,8 +16,11 @@ int main(int argc, char *argv[])
 	char **cmd;
 	int exc;
 
-	(void)argc;
-	(void)argv;
+	if (argc >= 2)
+	{
+		perror(argv[0]);
+		exit(-1);
+	}
 
 	do {
 		mode = isatty(STDIN_FILENO);
@@ -34,14 +37,21 @@ int main(int argc, char *argv[])
 		read = getline(&buffer, &bufsize, stdin);
 		if (read == -1)
 		{
-			free(cmd);
 			free(buffer);
+			_putstr("\n");
 			exit(0); /*exit on "EOF" */
 		}
 		buffer[_strcspn(buffer, "\n")] = '\0';
 		cmd = gettoks(buffer);
+		if (cmd == NULL)
+		{
+			free(buffer);
+			perror("allocation failed");
+			exit(1);
+		}
 		if (_strncmp("exit", cmd[0], 4) == 0)
 		{
+			free(buffer);
 			exit(0);
 		}
 		exc = _execve(cmd);
