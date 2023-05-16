@@ -28,6 +28,22 @@ char **gettoks(char *str)
 }
 
 /**
+ * freetoken : free token
+ * tok: string
+ */
+
+void freetoken(char **tok)
+{
+	int i = 0;
+
+	while (tok != NULL && i < MAX)
+	{
+		free(tok[i]);
+	}
+	free(tok);
+}
+
+/**
  * _execve: creat a process and execute a comand
  * @comnd: the command need to be executed
  * Return: 0 on success , -1 on error or 1 on any other error
