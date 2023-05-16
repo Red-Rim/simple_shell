@@ -19,5 +19,7 @@ char **gettoks(char *str);
 int main(int argc, char *argv[]);
 int _strncmp(const char *s1, const char *s2, size_t n);
 size_t _strcspn(const char *s1, const char *s2);
+void freetoken(char **str);
+int _execve(char **comnd);
 
 #endif

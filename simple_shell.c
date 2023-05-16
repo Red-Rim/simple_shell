@@ -10,22 +10,19 @@
 int main(int argc, char *argv[])
 {
 	int mode = 1;
-	char str[] = "#cisfun$ ";
 	char *buffer;
 	size_t bufsize = 1024;
 	ssize_t read;
 	char **cmd;
-	pid_t pid;
-	int status;
+	int exc;
 
 	(void)argc;
 	(void)argv;
 
-	while (mode == 1)
-	{
+	do{
 		mode = isatty(STDIN_FILENO);
 		if (mode == 1)
-			write(STDOUT_FILENO, str, _strlen(str));
+			write(STDOUT_FILENO, "#cisfun$ ", _strlen("#cisfun$ "));
 
 		buffer = malloc(bufsize * sizeof(char));
 		if (buffer == NULL)
@@ -37,54 +34,18 @@ int main(int argc, char *argv[])
 		read = getline(&buffer, &bufsize, stdin);
 		if (read == -1)
 		{
-			free(buffer);
 			free(cmd);
+			free(buffer);
 			exit(0); /*exit on "EOF" */
 		}
 		buffer[_strcspn(buffer, "\n")] = '\0';
 		cmd = gettoks(buffer);
-
-	if (_strncmp("exit", cmd[0], 4) == 0)
-	{
-		free(buffer);
-		free(cmd);
-		exit(0);
-	}
-
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("fork failed");
-		free(buffer);
-		free(cmd);
-		exit(EXIT_FAILURE);
-	}
-	else if (pid == 0)
-	{
-		if (access(cmd[0], F_OK) == 0)
+		if (_strncmp("exit", cmd[0], 4) == 0)
 		{
-		if (execve(cmd[0], cmd, NULL) == -1)
-		{
-			perror("execeve failed");
-			free(cmd);
-			free(buffer);
-			_putstr("./shell: No such file or directory\n");
-			exit(EXIT_FAILURE);
+			exit(0);
 		}
-		}
-		else
-		{
-			_putstr("./shell: No such file or directory\n");
-			free(cmd);
-			free(buffer);
-			exit(EXIT_FAILURE);
-		}
-	}
-	else
-	{
-		wait(&status);
-		free(cmd);
-	}
-	}
+		exc = _execve(cmd);
+	}while (mode == 1 && exc == 0);
+	
 	return (0);
 }
