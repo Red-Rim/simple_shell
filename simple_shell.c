@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 	(void)argc;
 	(void)argv;
 
-	do{
+	do {
 		mode = isatty(STDIN_FILENO);
 		if (mode == 1)
 			write(STDOUT_FILENO, "#cisfun$ ", _strlen("#cisfun$ "));
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 			exit(0);
 		}
 		exc = _execve(cmd);
-	}while (mode == 1 && exc == 0);
-	
+	} while (mode == 1 && exc == 0);
+
 	return (0);
 }
