@@ -28,8 +28,8 @@ char **gettoks(char *str)
 }
 
 /**
- * freetoken : free token
- * tok: string
+ * freetoken - free token
+ * @tok: string
  */
 
 void freetoken(char **tok)
@@ -44,7 +44,7 @@ void freetoken(char **tok)
 }
 
 /**
- * _execve: creat a process and execute a comand
+ * _execve - creat a process and execute a comand
  * @comnd: the command need to be executed
  * Return: 0 on success , -1 on error or 1 on any other error
  */
@@ -54,31 +54,30 @@ int _execve(char **comnd)
 	int status;
 
 	pid = fork();
-        if (pid == -1)
-        {
-                perror("fork failed");
-                exit(1);
-        }
-        else if (pid == 0)
-        {
-                if (access(comnd[0], F_OK) == 0)
-                {
+	if (pid == -1)
+	{
+		perror("fork failed");
+		exit(1);
+	}
+	else if (pid == 0)
+	{
+		if (access(comnd[0], F_OK) == 0)
+		{
 			if (execve(comnd[0], comnd, NULL) == -1)
 			{
 				perror("./shell");
-				return(-1);
+				return (-1);
 			}
-                }
-                else
-                {
-                        perror("./shell");
-                        exit(1);
-                }
-        }
-        else
-        {
-                wait(&status);
-
-        }
+		}
+		else
+		{
+			perror("./shell");
+			exit(1);
+		}
+	}
+	else
+	{
+		wait(&status);
+	}
 	return (0);
 }
