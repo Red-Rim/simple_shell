@@ -1,4 +1,5 @@
 #include "shell.h"
+
  /*Red-Riml & Fatimazahraker*/
 /**
  * main - simlpe shell (UNIX command line interpreter)
@@ -25,7 +26,7 @@ int main(int argc, char *argv[])
 		exit(-1);
 	}
 
-	do{
+	do {
 		mode = isatty(STDIN_FILENO);
 		if (mode == 1)
 			write(STDOUT_FILENO, "#cisfun$ ", _strlen("#cisfun$ "));
@@ -34,7 +35,7 @@ int main(int argc, char *argv[])
 		if (buffer == NULL)
 		{
 			perror("allocation failed");
-			exit(1);
+			exit(EXIT_FAILURE);
 		}
 
 		read = getline(&buffer, &bufsize, stdin);
@@ -57,9 +58,15 @@ int main(int argc, char *argv[])
 			free(buffer);
 			exit(0);
 		}
+<<<<<<< HEAD
 		ptr = *cmd;
 		exc = _execve(ptr,cmd);
 	}while (mode == 1 && exc == 0);
 	
+=======
+		exc = _execve(cmd);
+	} while (mode == 1 && exc == 0);
+
+>>>>>>> 2ff368f4952db44ab3b8bdab510bf1daa09acd44
 	return (0);
 }
