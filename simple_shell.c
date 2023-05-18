@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 		if (buffer == NULL)
 		{
 			perror("allocation failed");
-			exit(1);
+			exit(EXIT_FAILURE);
 		}
 
 		read = getline(&buffer, &bufsize, stdin);
