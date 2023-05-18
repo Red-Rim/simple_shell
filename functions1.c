@@ -122,7 +122,6 @@ int _execve(char **comnd)
 	path = *comnd;
 
 	pid = fork();
-<<<<<<< HEAD
 	if (pid == -1)
 	{
 		perror("fork failed");
@@ -132,7 +131,6 @@ int _execve(char **comnd)
 	else if (pid == 0)
 	{
 		if (access(comnd[0], F_OK) == 0)
-=======
 
         if (pid == -1)
         {
@@ -142,7 +140,6 @@ int _execve(char **comnd)
         else if (pid == 0)
         {
                 if (access(path, F_OK) == 0)
->>>>>>> ee9a18d482aeb4b4de883182c869674440c95d6f
 		{
 			if (execve(path, comnd, NULL) == -1)
 			{
@@ -151,7 +148,6 @@ int _execve(char **comnd)
 				free(cmd);
 				exit(EXIT_FAILURE);
 			}
-<<<<<<< HEAD
 		}
 		else
 		{
@@ -166,7 +162,6 @@ int _execve(char **comnd)
 		if (mode == 1)
 			write(STDOUT_FILENO, "#cisfun$ ", _strlen("#cisfun$ "));
 	}
-=======
                 }
                 else
                 {
@@ -181,6 +176,5 @@ int _execve(char **comnd)
         }
 	printf("path is %s", path);
 	free(path);
->>>>>>> ee9a18d482aeb4b4de883182c869674440c95d6f
 	return (0);
 }

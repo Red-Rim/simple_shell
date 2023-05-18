@@ -57,7 +57,6 @@ int main(int argc, char *argv[])
 			exit(EXIT_SUCCESS);
 		}
 		exc = _execve(cmd);
-<<<<<<< HEAD
 		if (exc == -1)
 		{
 			_putstr("./shell: No such file or directory\n");
@@ -67,9 +66,7 @@ int main(int argc, char *argv[])
 		}
 	} while (mode == 1);
 
-=======
 	}while (mode == 1 && exc == 0);
-	
->>>>>>> ee9a18d482aeb4b4de883182c869674440c95d6f
+
 	return (0);
 }
