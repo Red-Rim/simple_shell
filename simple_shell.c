@@ -15,6 +15,9 @@ int main(int argc, char *argv[])
 	ssize_t read;
 	char **cmd;
 	int exc;
+	char *ptr;
+
+	ptr = NULL;
 
 	if (argc >= 2)
 	{
@@ -42,7 +45,7 @@ int main(int argc, char *argv[])
 			exit(0); /*exit on "EOF" */
 		}
 		buffer[_strcspn(buffer, "\n")] = '\0';
-		cmd = gettoks(buffer);
+		cmd = gettoks(buffer, " ");
 		if (cmd == NULL)
 		{
 			free(buffer);
@@ -54,7 +57,8 @@ int main(int argc, char *argv[])
 			free(buffer);
 			exit(0);
 		}
-		exc = _execve(cmd);
+		ptr = *cmd;
+		exc = _execve(ptr,cmd);
 	}while (mode == 1 && exc == 0);
 	
 	return (0);
