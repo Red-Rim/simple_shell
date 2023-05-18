@@ -44,12 +44,11 @@ void freetoken(char **tok)
 }
 
 /**
-<<<<<<< HEAD
  * _getenv - get environement of  PATH
  * @name: path name
  * Return: environement or NULL
  */
-char*  _getenv(char* name)
+char *_getenv(char *name)
 {
 	extern char **environ;
 	int length;
@@ -75,7 +74,7 @@ char*  _getenv(char* name)
  * Return: pointer or null
  */
 
-char* cmnd_path(char* command)
+char *cmnd_path(char *command)
 {
 	char* path_env = _getenv("PATH");
 	char* dir = strtok(path_env, ":");
@@ -108,25 +107,22 @@ char* cmnd_path(char* command)
 }
 /**
  * _execve: creat a process and execute a comand
-=======
- * _execve - creat a process and execute a comand
->>>>>>> 2ff368f4952db44ab3b8bdab510bf1daa09acd44
  * @comnd: the command need to be executed
  * Return: 0 on success , -1 on error or 1 on any other error
  */
-int _execve(char* comnd,char** cmd)
+int _execve(char **comnd)
 {
 	char *path;
 	pid_t pid;
 	int status;
 
 
-	path = cmnd_path(comnd);
+	path = cmnd_path(*comnd);
 	if (path == NULL)
-	path = comnd;
+	path = *comnd;
 
 	pid = fork();
-<<<<<<< HEAD
+
         if (pid == -1)
         {
                 perror("fork failed");
@@ -135,25 +131,12 @@ int _execve(char* comnd,char** cmd)
         else if (pid == 0)
         {
                 if (access(path, F_OK) == 0)
-                {
-			if (execve(path, cmd, NULL) == -1)
-=======
-	if (pid == -1)
-	{
-		perror("fork failed");
-		exit(1);
-	}
-	else if (pid == 0)
-	{
-		if (access(comnd[0], F_OK) == 0)
 		{
-			if (execve(comnd[0], comnd, NULL) == -1)
->>>>>>> 2ff368f4952db44ab3b8bdab510bf1daa09acd44
+			if (execve(path, comnd, NULL) == -1)
 			{
 				perror("./shell");
 				return (-1);
 			}
-<<<<<<< HEAD
                 }
                 else
                 {
@@ -166,20 +149,7 @@ int _execve(char* comnd,char** cmd)
                 wait(&status);
 
         }
-
+	printf("path is %s", path);
 	free(path);
-=======
-		}
-		else
-		{
-			perror("./shell");
-			exit(1);
-		}
-	}
-	else
-	{
-		wait(&status);
-	}
->>>>>>> 2ff368f4952db44ab3b8bdab510bf1daa09acd44
 	return (0);
 }

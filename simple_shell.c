@@ -16,9 +16,6 @@ int main(int argc, char *argv[])
 	ssize_t read;
 	char **cmd;
 	int exc;
-	char *ptr;
-
-	ptr = NULL;
 
 	if (argc >= 2)
 	{
@@ -58,15 +55,8 @@ int main(int argc, char *argv[])
 			free(buffer);
 			exit(0);
 		}
-<<<<<<< HEAD
-		ptr = *cmd;
-		exc = _execve(ptr,cmd);
+		exc = _execve(cmd);
 	}while (mode == 1 && exc == 0);
 	
-=======
-		exc = _execve(cmd);
-	} while (mode == 1 && exc == 0);
-
->>>>>>> 2ff368f4952db44ab3b8bdab510bf1daa09acd44
 	return (0);
 }
