@@ -48,15 +48,23 @@ int main(int argc, char *argv[])
 		{
 			free(buffer);
 			perror("allocation failed");
-			exit(1);
+			exit(EXIT_FAILURE);
 		}
 		if (_strncmp("exit", cmd[0], 4) == 0)
 		{
 			free(buffer);
-			exit(0);
+			free(cmd);
+			exit(EXIT_SUCCESS);
 		}
 		exc = _execve(cmd);
-	} while (mode == 1 && exc == 0);
+		if (exc == -1)
+		{
+			_putstr("./shell: No such file or directory\n");
+			free(buffer);
+			free(cmd);
+			exit(EXIT_FAILURE);
+		}
+	} while (mode == 1);
 
 	return (0);
 }

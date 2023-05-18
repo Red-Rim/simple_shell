@@ -57,7 +57,8 @@ int _execve(char **comnd)
 	if (pid == -1)
 	{
 		perror("fork failed");
-		exit(1);
+		free(cmd);
+		exit(EXIT_FAILURE);
 	}
 	else if (pid == 0)
 	{
@@ -66,7 +67,9 @@ int _execve(char **comnd)
 			if (execve(comnd[0], comnd, NULL) == -1)
 			{
 				perror("./shell");
-				return (-1);
+				free(buffer);
+				free(cmd);
+				exit(EXIT_FAILURE);
 			}
 		}
 		else
@@ -78,6 +81,9 @@ int _execve(char **comnd)
 	else
 	{
 		wait(&status);
+		free(cmd);
+		if (mode == 1)
+			write(STDOUT_FILENO, "#cisfun$ ", _strlen("#cisfun$ "));
 	}
 	return (0);
 }
