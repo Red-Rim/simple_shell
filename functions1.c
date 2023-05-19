@@ -10,7 +10,7 @@
 char **gettoks(char *str, char *deliminer)
 {
 	int i = 0;
-	char **toks = malloc((MAX + 1) * sizeof(char **));
+	char **toks = malloc((MAX + 1) * sizeof(char *));
 	char *token;
 	token = strtok(str, deliminer);
 
@@ -39,6 +39,7 @@ void freetoken(char **tok)
 	while (tok != NULL && i < MAX)
 	{
 		free(tok[i]);
+		i++;
 	}
 	free(tok);
 }
@@ -122,16 +123,6 @@ int _execve(char **comnd)
 	path = *comnd;
 
 	pid = fork();
-	if (pid == -1)
-	{
-		perror("fork failed");
-		free(cmd);
-		exit(EXIT_FAILURE);
-	}
-	else if (pid == 0)
-	{
-		if (access(comnd[0], F_OK) == 0)
-
         if (pid == -1)
         {
                 perror("fork failed");
@@ -144,8 +135,6 @@ int _execve(char **comnd)
 			if (execve(path, comnd, NULL) == -1)
 			{
 				perror("./shell");
-				free(buffer);
-				free(cmd);
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -156,25 +145,10 @@ int _execve(char **comnd)
 		}
 	}
 	else
-	{
-		wait(&status);
-		free(cmd);
-		if (mode == 1)
-			write(STDOUT_FILENO, "#cisfun$ ", _strlen("#cisfun$ "));
-	}
-                }
-                else
-                {
-                        perror("./shell");
-                        exit(1);
-                }
-        }
-        else
         {
                 wait(&status);
 
         }
-	printf("path is %s", path);
 	free(path);
 	return (0);
 }

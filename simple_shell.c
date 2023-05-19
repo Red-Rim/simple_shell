@@ -11,11 +11,11 @@
 int main(int argc, char *argv[])
 {
 	int mode = 1;
-	char *buffer;
+	char *buffer = NULL;
 	size_t bufsize = 1024;
-	ssize_t read;
-	char **cmd;
-	int exc;
+	ssize_t read = 0;
+	char **cmd = NULL;
+	int exc = 0;
 
 	if (argc >= 2)
 	{
@@ -56,6 +56,11 @@ int main(int argc, char *argv[])
 			free(cmd);
 			exit(EXIT_SUCCESS);
 		}
+		if (_strncmp("env", cmd[0], 4) == 0)
+		{        
+		       	_env();
+		}
+
 		exc = _execve(cmd);
 		if (exc == -1)
 		{
@@ -64,8 +69,6 @@ int main(int argc, char *argv[])
 			free(cmd);
 			exit(EXIT_FAILURE);
 		}
-	} while (mode == 1);
-
 	}while (mode == 1 && exc == 0);
 
 	return (0);
