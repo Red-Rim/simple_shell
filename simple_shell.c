@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
 			perror("allocation failed");
 			exit(EXIT_FAILURE);
 		}
-		if (_strncmp("exit", cmd[0], 4) == 0)
+		/**if (_strncmp("exit", cmd[0], 4) == 0)
 		{
 			free(buffer);
 			free(cmd);
@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
 		{        
 		       	_env();
 		}
-
+**/
 		exc = _execve(cmd);
 		if (exc == -1)
 		{
