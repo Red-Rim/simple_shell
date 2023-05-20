@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * gettoks - function used to tokenize a string
  * @str: string
@@ -10,7 +9,7 @@
 char **gettoks(char *str, char *deliminer)
 {
 	int i = 0;
-	char **toks = malloc((MAX + 1) * sizeof(char *));
+	char **toks = malloc((MAX + 1) * sizeof(char **));
 	char *token;
 	token = strtok(str, deliminer);
 
@@ -36,7 +35,7 @@ void freetoken(char **tok)
 {
 	int i = 0;
 
-	while (tok != NULL && i < MAX)
+	while (tok[i] != NULL && i < MAX)
 	{
 		free(tok[i]);
 		i++;
@@ -123,11 +122,11 @@ int _execve(char **comnd)
 	path = *comnd;
 
 	pid = fork();
-        if (pid == -1)
-        {
-                perror("fork failed");
-                exit(1);
-        }
+	if (pid == -1)
+	{
+		perror("fork failed");
+		exit(EXIT_FAILURE);
+	}
         else if (pid == 0)
         {
                 if (access(path, F_OK) == 0)

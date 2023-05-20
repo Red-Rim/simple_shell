@@ -46,8 +46,8 @@ int main(int argc, char *argv[])
 		cmd = gettoks(buffer, " ");
 		if (cmd == NULL)
 		{
-			free(buffer);
 			perror("allocation failed");
+			free(buffer);
 			exit(EXIT_FAILURE);
 		}
 		/**if (_strncmp("exit", cmd[0], 4) == 0)
@@ -59,16 +59,20 @@ int main(int argc, char *argv[])
 		if (_strncmp("env", cmd[0], 4) == 0)
 		{        
 		       	_env();
+			free(cmd);
 		}
 **/
 		exc = _execve(cmd);
 		if (exc == -1)
 		{
 			_putstr("./shell: No such file or directory\n");
-			free(buffer);
 			free(cmd);
+			free(buffer);
 			exit(EXIT_FAILURE);
 		}
+		free(cmd);
+
+		free(buffer);
 	}while (mode == 1 && exc == 0);
 
 	return (0);
