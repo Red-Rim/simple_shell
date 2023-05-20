@@ -7,7 +7,7 @@
  * Return: tokens
  */
 
-char **gettoks(char *str, char *deliminer)
+char **gettoks(char str, char **deliminer)
 {
 	int i = 0;
 	char **toks = malloc((MAX + 1) * sizeof(char *));
@@ -123,24 +123,12 @@ int _execve(char **comnd)
 	path = *comnd;
 
 	pid = fork();
-<<<<<<< HEAD
 	if (pid == -1)
 	{
 		perror("fork failed");
 		free(cmd);
 		exit(EXIT_FAILURE);
 	}
-	else if (pid == 0)
-	{
-		if (access(comnd[0], F_OK) == 0)
-	}
-=======
->>>>>>> 2bc7ce72250fb105f8a3c29133cb7999fef6479d
-        if (pid == -1)
-        {
-                perror("fork failed");
-                exit(1);
-        }
         else if (pid == 0)
         {
                 if (access(path, F_OK) == 0)
@@ -148,11 +136,6 @@ int _execve(char **comnd)
 			if (execve(path, comnd, NULL) == -1)
 			{
 				perror("./shell");
-<<<<<<< HEAD
-				free(setbuffer);
-				free(cmd);
-=======
->>>>>>> 2bc7ce72250fb105f8a3c29133cb7999fef6479d
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -163,23 +146,6 @@ int _execve(char **comnd)
 		}
 	}
 	else
-<<<<<<< HEAD
-	{
-		wait(&status);
-		free(cmd);
-		if (mode_t == 1)
-			write(STDOUT_FILENO, "#cisfun$ ", _strlen("#cisfun$ "));
-	}
-                }
-                else
-                {
-                        perror("./shell");
-                        exit(1);
-                }
-        }
-        else
-=======
->>>>>>> 2bc7ce72250fb105f8a3c29133cb7999fef6479d
         {
                 wait(&status);
 
