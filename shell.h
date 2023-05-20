@@ -23,5 +23,6 @@ int _execve(char **comnd);
 char *_getenv(char *name);
 char *_strcpy(char *dest, char *src);
 char *cmnd_path(char *command);
+int _env(void);
 
 #endif

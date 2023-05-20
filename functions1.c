@@ -10,7 +10,7 @@
 char **gettoks(char *str, char *deliminer)
 {
 	int i = 0;
-	char **toks = malloc((MAX + 1) * sizeof(char **));
+	char **toks = malloc((MAX + 1) * sizeof(char *));
 	char *token;
 	token = strtok(str, deliminer);
 
@@ -123,6 +123,7 @@ int _execve(char **comnd)
 	path = *comnd;
 
 	pid = fork();
+<<<<<<< HEAD
 	if (pid == -1)
 	{
 		perror("fork failed");
@@ -133,6 +134,8 @@ int _execve(char **comnd)
 	{
 		if (access(comnd[0], F_OK) == 0)
 	}
+=======
+>>>>>>> 2bc7ce72250fb105f8a3c29133cb7999fef6479d
         if (pid == -1)
         {
                 perror("fork failed");
@@ -145,8 +148,11 @@ int _execve(char **comnd)
 			if (execve(path, comnd, NULL) == -1)
 			{
 				perror("./shell");
+<<<<<<< HEAD
 				free(setbuffer);
 				free(cmd);
+=======
+>>>>>>> 2bc7ce72250fb105f8a3c29133cb7999fef6479d
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -157,6 +163,7 @@ int _execve(char **comnd)
 		}
 	}
 	else
+<<<<<<< HEAD
 	{
 		wait(&status);
 		free(cmd);
@@ -171,11 +178,12 @@ int _execve(char **comnd)
                 }
         }
         else
+=======
+>>>>>>> 2bc7ce72250fb105f8a3c29133cb7999fef6479d
         {
                 wait(&status);
 
         }
-	printf("path is %s", path);
 	free(path);
 	return (0);
 }
