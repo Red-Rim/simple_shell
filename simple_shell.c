@@ -39,8 +39,12 @@ int main(int argc, char *argv[])
 		if (read == -1)
 		{
 			free(buffer);
-			_putstr("\n");
+			write(STDOUT_FILENO, "\n", _strlen("\n"));
 			exit(0); /*exit on "EOF" */
+		}
+		if (_strncmp("\n", buffer, 1) == 0)
+		{
+			continue;
 		}
 		buffer[_strcspn(buffer, "\n")] = '\0';
 		cmd = gettoks(buffer, " ");
@@ -50,18 +54,18 @@ int main(int argc, char *argv[])
 			free(buffer);
 			exit(EXIT_FAILURE);
 		}
-		/**if (_strncmp("exit", cmd[0], 4) == 0)
+		if (_strncmp("exit", *cmd, 4) == 0)
 		{
 			free(buffer);
 			free(cmd);
 			exit(EXIT_SUCCESS);
 		}
-		if (_strncmp("env", cmd[0], 4) == 0)
+		if (_strncmp("env", *cmd, 3) == 0)
 		{        
 		       	_env();
 			free(cmd);
+			continue;
 		}
-**/
 		exc = _execve(cmd);
 		if (exc == -1)
 		{

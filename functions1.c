@@ -77,7 +77,8 @@ char *_getenv(char *name)
 char *cmnd_path(char *command)
 {
 	char* path_env = _getenv("PATH");
-	char* dir = strtok(path_env, ":");
+	char* dup = strdup(path_env);
+	char* dir = strtok(dup, ":");
 
     while (dir != NULL)
     {
