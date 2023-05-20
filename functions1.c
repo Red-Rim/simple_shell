@@ -1,16 +1,15 @@
 #include "shell.h"
 
-
 /**
  * gettoks - function used to tokenize a string
  * @str: string
  * Return: tokens
  */
 
-char **gettoks(char str, char **deliminer)
+char **gettoks(char *str, char *deliminer)
 {
 	int i = 0;
-	char **toks = malloc((MAX + 1) * sizeof(char *));
+	char **toks = malloc((MAX + 1) * sizeof(char **));
 	char *token;
 	token = strtok(str, deliminer);
 
@@ -126,7 +125,6 @@ int _execve(char **comnd)
 	if (pid == -1)
 	{
 		perror("fork failed");
-		free(cmd);
 		exit(EXIT_FAILURE);
 	}
         else if (pid == 0)
