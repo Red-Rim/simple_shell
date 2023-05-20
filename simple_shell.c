@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
 
 		free(buffer);
 	}
-	while (mode == 1 && exc == 0)
+	while (mode == 1 && exc == 0);
 
 	return (0);
 }

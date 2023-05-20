@@ -107,7 +107,7 @@ char *cmnd_path(char *command)
     return NULL;
 }
 /**
- * _execve: creat a process and execute a comand
+ * _execve - creat a process and execute a comand
  * @comnd: the command need to be executed
  * Return: 0 on success , -1 on error or 1 on any other error
  */
