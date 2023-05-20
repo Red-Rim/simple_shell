@@ -61,8 +61,8 @@ int main(int argc, char *argv[])
 			exit(EXIT_SUCCESS);
 		}
 		if (_strncmp("env", *cmd, 3) == 0)
-		{        
-		       	_env();
+		{
+			_env();
 			free(cmd);
 			continue;
 		}
@@ -77,7 +77,8 @@ int main(int argc, char *argv[])
 		free(cmd);
 
 		free(buffer);
-	}while (mode == 1 && exc == 0);
+	}
+	while (mode == 1 && exc == 0)
 
 	return (0);
 }
