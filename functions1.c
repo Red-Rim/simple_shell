@@ -36,9 +36,10 @@ void freetoken(char **tok)
 {
 	int i = 0;
 
-	while (tok != NULL && i < MAX)
+	while (tok[i] != NULL && i < MAX)
 	{
 		free(tok[i]);
+		i++;
 	}
 	free(tok);
 }
@@ -131,7 +132,7 @@ int _execve(char **comnd)
 	else if (pid == 0)
 	{
 		if (access(comnd[0], F_OK) == 0)
-
+	}
         if (pid == -1)
         {
                 perror("fork failed");
@@ -144,7 +145,7 @@ int _execve(char **comnd)
 			if (execve(path, comnd, NULL) == -1)
 			{
 				perror("./shell");
-				free(buffer);
+				free(setbuffer);
 				free(cmd);
 				exit(EXIT_FAILURE);
 			}
@@ -159,7 +160,7 @@ int _execve(char **comnd)
 	{
 		wait(&status);
 		free(cmd);
-		if (mode == 1)
+		if (mode_t == 1)
 			write(STDOUT_FILENO, "#cisfun$ ", _strlen("#cisfun$ "));
 	}
                 }

@@ -64,8 +64,6 @@ int main(int argc, char *argv[])
 			free(cmd);
 			exit(EXIT_FAILURE);
 		}
-	} while (mode == 1);
-
 	}while (mode == 1 && exc == 0);
 
 	return (0);
