@@ -56,23 +56,17 @@ int main(int argc, char *argv[])
 		}
 		if (_strncmp("exit", *cmd, 4) == 0)
 		{
-			free(buffer);
-			freetoken(cmd);
 			exit(EXIT_SUCCESS);
 		}
 		if (_strncmp("env", *cmd, 3) == 0)
 		{
 			_env();
-			free(buffer);
-			freetoken(cmd);
 			continue;
 		}
 		exc = _execve(cmd);
 		if (exc == -1)
 		{
 			perror("./shell");
-			free(cmd);
-			free(buffer);
 			continue;
 		}
 		freetoken(cmd);
