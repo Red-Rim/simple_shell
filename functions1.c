@@ -67,13 +67,11 @@ char *cmnd_path(char *command)
             _strcpy(command_path, dir);
             command_path[dir_len] = '/';
             _strcpy(command_path + dir_len + 1, command);
-
             if (access(command_path, X_OK) == 0)
 	    {
 		 free(dup);
                 return command_path;
             }
-	    free(dup);
             free(command_path);
         }
 
@@ -110,7 +108,6 @@ int _execve(char **comnd)
         {
 			if (execve(path, comnd, NULL) == -1)
 			{
-				free(path);
 				return(-1);
 			}
 	}

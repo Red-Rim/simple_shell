@@ -44,6 +44,7 @@ int main(int argc, char *argv[])
 		}
 		if (_strncmp("\n", buffer, 1) == 0)
 		{
+			free(buffer);
 			continue;
 		}
 		buffer[_strcspn(buffer, "\n")] = '\0';
@@ -56,17 +57,23 @@ int main(int argc, char *argv[])
 		}
 		if (_strncmp("exit", *cmd, 4) == 0)
 		{
+			freetoken(cmd);
+			free(buffer);
 			exit(EXIT_SUCCESS);
 		}
 		if (_strncmp("env", *cmd, 3) == 0)
 		{
 			_env();
+			freetoken(cmd);
+			free(buffer);
 			continue;
 		}
 		exc = _execve(cmd);
 		if (exc == -1)
 		{
 			perror("./shell");
+			freetoken(cmd);
+			free(buffer);
 			continue;
 		}
 		freetoken(cmd);
