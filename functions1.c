@@ -1,5 +1,33 @@
 #include "shell.h"
 
+
+/**
+ *
+ *
+ */
+
+char *getlinebuffer(void)
+{
+	char *buffer;
+	size_t bufsize = 1024;
+	ssize_t read = 0;
+
+	buffer = malloc(bufsize * sizeof(char));
+	if (buffer != NULL)
+	{
+		read = getline(&buffer, &bufsize, stdin);
+		if (read == -1)
+		{
+			free(buffer);
+			write(STDOUT_FILENO, "\n", _strlen("\n"));
+			exit(0); /*exit on "EOF" */
+		}
+		buffer[_strcspn(buffer, "\n")] = '\0';
+		return (buffer);
+	}
+	return(NULL);
+}
+
 /**
  * gettoks - function used to tokenize a string
  * @str: string
@@ -72,7 +100,7 @@ char *cmnd_path(char *command)
 		 free(dup);
                 return command_path;
             }
-            free(command_path);
+	    free(command_path);
         }
 
         dir = strtok(NULL, ":");
@@ -108,6 +136,7 @@ int _execve(char **comnd)
         {
 			if (execve(path, comnd, NULL) == -1)
 			{
+				free(path);
 				return(-1);
 			}
 	}
@@ -123,6 +152,5 @@ int _execve(char **comnd)
 		return(-1);
 	}
 	free(path);
-
 	return (0);
 }
