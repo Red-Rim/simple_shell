@@ -52,30 +52,30 @@ int main(int argc, char *argv[])
 		{
 			perror("allocation failed");
 			free(buffer);
-			exit(EXIT_FAILURE);
+			continue;
 		}
 		if (_strncmp("exit", *cmd, 4) == 0)
 		{
 			free(buffer);
-			free(cmd);
+			freetoken(cmd);
 			exit(EXIT_SUCCESS);
 		}
 		if (_strncmp("env", *cmd, 3) == 0)
 		{
 			_env();
-			free(cmd);
+			free(buffer);
+			freetoken(cmd);
 			continue;
 		}
 		exc = _execve(cmd);
 		if (exc == -1)
 		{
-			_putstr("./shell: No such file or directory\n");
+			perror("./shell");
 			free(cmd);
 			free(buffer);
-			exit(EXIT_FAILURE);
+			continue;
 		}
-		free(cmd);
-
+		freetoken(cmd);
 		free(buffer);
 	}
 	while (mode == 1 && exc == 0);

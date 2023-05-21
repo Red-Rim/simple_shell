@@ -24,16 +24,15 @@ char *_strcpy(char *dest, char *src)
 /*--------------------_strdup---------------------*/
 /**
  */
-char _strdup(const char *str)
+char* _strdup(char *str)
 {
-	size_t len = strlen(str) + 1;
-	char *duplicate = malloc(len);
+	size_t len = _strlen(str) + 1;
+	char *duplicate = malloc(len * sizeof(char *));
 
 	if (duplicate == NULL)
 	{
-		perror("allocation failed");
 		return (NULL);
 	}
 
-	return (strcpy(duplicate, str));
+	return (_strcpy(duplicate, str));
 }

@@ -95,15 +95,16 @@ char *cmnd_path(char *command)
 
             if (access(command_path, X_OK) == 0)
 	    {
+		 free(dup);
                 return command_path;
             }
-
+	    free(dup);
             free(command_path);
         }
 
         dir = strtok(NULL, ":");
     }
-
+    free(dup);
     return NULL;
 }
 /**
@@ -122,33 +123,34 @@ int _execve(char **comnd)
 	if (path == NULL)
 	path = *comnd;
 
-	pid = fork();
+	if (access(path, F_OK) == 0)
+	{
+		pid = fork();
 	if (pid == -1)
 	{
-		perror("fork failed");
-		exit(EXIT_FAILURE);
+		free(path);
+		return(-1);
 	}
         else if (pid == 0)
         {
-                if (access(path, F_OK) == 0)
-		{
 			if (execve(path, comnd, NULL) == -1)
 			{
-				perror("./shell");
-				exit(EXIT_FAILURE);
+				free(path);
+				return(-1);
 			}
-		}
-		else
-		{
-			perror("./shell");
-			exit(1);
-		}
 	}
 	else
         {
                 wait(&status);
 
         }
+	}
+	else
+	{
+		free(path);
+		return(-1);
+	}
 	free(path);
+
 	return (0);
 }
