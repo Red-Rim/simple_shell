@@ -61,7 +61,6 @@ int main(int argc, char *argv[])
 			perror("./shell");
 			exc = 0;
 			freetoken(cmd);
-                        free(buffer);
 			continue;
 		}
 		freetoken(cmd);

@@ -61,12 +61,12 @@ char **gettoks(char *str, char *deliminer)
 
 void freetoken(char **tok)
 {
-	int i = 0;
+	if(tok == NULL)
+		return;
 
-	while (tok[i] != NULL && i < MAX)
+	for (int i = 0; tok[i] != NULL i++)
 	{
 		free(tok[i]);
-		i++;
 	}
 	free(tok);
 }
@@ -137,7 +137,8 @@ int _execve(char **comnd)
 			if (execve(path, comnd, NULL) == -1)
 			{
 				free(path);
-				return(-1);
+				freetoken(comnd);
+				exit(EXIT_FAILURE);;
 			}
 	}
 	else
@@ -151,6 +152,6 @@ int _execve(char **comnd)
 		free(path);
 		return(-1);
 	}
-	free(path);
+	freetoken(comnd);
 	return (0);
 }
