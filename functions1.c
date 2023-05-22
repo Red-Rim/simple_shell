@@ -61,16 +61,16 @@ char **gettoks(char *str, char *deliminer)
 
 void freetoken(char **tok)
 {
-	if(tok == NULL)
-		return;
+	int i = 0;
 
-	for (int i = 0; tok[i] != NULL i++)
+	while (tok[i] != NULL && i < MAX)
 	{
 		free(tok[i]);
+		i++;
 	}
+
 	free(tok);
 }
-
 /**
  * cmnd_path - path of command
  * @command: command
