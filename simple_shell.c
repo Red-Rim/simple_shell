@@ -9,63 +9,45 @@
  */
 
 int main(int argc, char *argv[])
-{
-	int mode = 1;
+{	int mode = 1;
 	char *buffer = NULL;
 	char **cmd = NULL;
 	int exc = 0;
 
 	if (argc >= 2)
-	{
-		perror(argv[0]);
-		exit(-1);
-	}
-	do {
-		mode = isatty(STDIN_FILENO);
+	{	perror(argv[0]);
+		exit(-1); }
+	do {	mode = isatty(STDIN_FILENO);
 		if (mode == 1)
 			write(STDOUT_FILENO, "#cisfun$ ", _strlen("#cisfun$ "));
 		buffer = getlinebuffer();
 		if (buffer == NULL)
-		{
-			perror("allocation failed");
-			exit(EXIT_FAILURE);
-		}
+		{	perror("allocation failed");
+			exit(EXIT_FAILURE); }
 		if (_strncmp("\n", buffer, 1) == 0)
-		{
-			free(buffer);
-			continue;
-		}
+		{	free(buffer);
+			continue; }
 		cmd = gettoks(buffer, " ");
 		if (cmd == NULL)
-		{
-			perror("allocation failed");
+		{	perror("allocation failed");
 			free(buffer);
-			continue;
-		}
+			continue; }
 		if (_strncmp("exit", *cmd, 4) == 0)
-		{
-			freetoken(cmd);
+		{	freetoken(cmd);
 			free(buffer);
-			exit(EXIT_SUCCESS);
-		}
+			exit(EXIT_SUCCESS); }
 		if (_strncmp("env", *cmd, 3) == 0)
-		{
-			_env();
+		{	_env();
 			freetoken(cmd);
 			free(buffer);
-			continue;
-		}
+			continue; }
 		exc = _execve(cmd);
 		if (exc == -1)
-		{
-			perror("./shell");
+		{	perror("./shell");
 			exc = 0;
 			freetoken(cmd);
-			continue;
-		}
+			continue; }
 		freetoken(cmd);
-		free(buffer);
-	}
-	while (mode == 1 && exc == 0);
-	return (0);
-}
+		free(buffer); }
+	while (mode == 1 && exc == 0); }
+		return (0); }
