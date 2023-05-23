@@ -1,9 +1,10 @@
 #include "shell.h"
 
-
 /**
+ * getlinebuffer - Retriieves a line of input from the user via standard input
  *
- *
+ * Return: The obtained input line as a null-terminated string,
+ * or NULL if memory allocation fails.
  */
 
 char *getlinebuffer(void)
@@ -25,7 +26,7 @@ char *getlinebuffer(void)
 		buffer[_strcspn(buffer, "\n")] = '\0';
 		return (buffer);
 	}
-	return(NULL);
+	return (NULL);
 }
 
 /**
@@ -39,6 +40,7 @@ char **gettoks(char *str, char *deliminer)
 	int i = 0;
 	char **toks = malloc((MAX + 1) * sizeof(char **));
 	char *token;
+
 	token = strtok(str, deliminer);
 
 	while (token != NULL && i < MAX)
@@ -68,9 +70,9 @@ void freetoken(char **tok)
 		free(tok[i]);
 		i++;
 	}
+
 	free(tok);
 }
-
 /**
  * cmnd_path - path of command
  * @command: command
@@ -119,68 +121,61 @@ int _execve(char **comnd)
 	pid_t pid;
 	int status;
 
-
 	path = cmnd_path(*comnd);
-	if (path == NULL)
-	{path = *comnd;
 
+	if (path == NULL)
+	{
+	path = *comnd;
 	if (access(path, F_OK) == 0)
 	{
 		pid = fork();
-	if (pid == -1)
-	{
-		return(-1);
-	}
-        else if (pid == 0)
-        {
+		if (pid == -1)
+		{
+			free(path);
+			return (-1);
+		}
+		else if (pid == 0)
+		{
 			if (execve(path, comnd, NULL) == -1)
-			{
 				return(-1);
-			}
+		}
+		else
+			wait(&status);
+		return(0);
 	}
 	else
-        {
-                wait(&status);
-
-        }
-	}
-	else
-	{
 		return(-1);
 	}
-	return(0);
-	}
+
 	else
 	{
 		if (access(path, F_OK) == 0)
-        {
+		{
                 pid = fork();
-        if (pid == -1)
-        {
-                free(path);
-                return(-1);
-        }
-        else if (pid == 0)
-        {
+                if (pid == -1)
+                {
+                        free(path);
+                        return (-1);
+                }
+                else if (pid == 0)
+                {
                         if (execve(path, comnd, NULL) == -1)
-                        {
-                                free(path);
-                                return(-1);
-                        }
+			{    
+				free(path);
+			       	return(-1);
+			}
+                }
+                else
+                        wait(&status);
+		free(path);
+                return(0);
         }
         else
-        {
-                wait(&status);
-
-        }
-        }
-        else
-        {
-                free(path);
+	{
+		free(path);
                 return(-1);
         }
-
-		free(path);
-	return (0);
 	}
 }
+
+

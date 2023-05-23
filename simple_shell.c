@@ -9,27 +9,22 @@
  */
 
 int main(int argc, char *argv[])
-{
-	int mode = 1;
+{	int mode = 1;
 	char *buffer = NULL;
 	char **cmd = NULL;
 	int exc = 0;
 
 	if (argc >= 2)
-	{
-		perror(argv[0]);
-		exit(-1);
-	}
-	do {
-		mode = isatty(STDIN_FILENO);
+	{	perror(argv[0]);
+		exit(-1); }
+	do {	mode = isatty(STDIN_FILENO);
 		if (mode == 1)
 			write(STDOUT_FILENO, "#cisfun$ ", _strlen("#cisfun$ "));
 		buffer = getlinebuffer();
 		if (buffer == NULL)
 		{
-			freetoken(cmd);
-                free(buffer);
 			perror("allocation failed");
+			free(buffer);
 			exit(EXIT_FAILURE);
 		}
 		if (_strncmp("\n", buffer, 1) == 0)
@@ -43,11 +38,9 @@ int main(int argc, char *argv[])
 			continue;
 		}
 		if (_strncmp("exit", *cmd, 4) == 0)
-		{
-			freetoken(cmd);
+		{	freetoken(cmd);
 			free(buffer);
-			exit(EXIT_SUCCESS);
-		}
+			exit(EXIT_SUCCESS); }
 		if (_strncmp("env", *cmd, 3) == 0)
 		{
 			_env();
@@ -55,14 +48,12 @@ int main(int argc, char *argv[])
 		}
 		exc = _execve(cmd);
 		if (exc == -1)
-		{
-			perror("./shell");
+		{	perror("./shell");
 			exc = 0;
 			continue;
 		}
 		freetoken(cmd);
 		free(buffer);
-	}
-	while (mode == 1 && exc == 0);
+       	}while (mode == 1 && exc == 0);
 	return (0);
 }
