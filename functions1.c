@@ -1,8 +1,10 @@
 #include "shell.h"
 
 /**
+ * getlinebuffer - Retriieves a line of input from the user via standard input
  *
- *
+ * Return: The obtained input line as a null-terminated string,
+ * or NULL if memory allocation fails.
  */
 
 char *getlinebuffer(void)
@@ -126,12 +128,13 @@ int _execve(char **comnd)
 	if (access(path, F_OK) == 0)
 	{
 		pid = fork();
+	}
 	if (pid == -1)
 	{
 		free(path);
 		return (-1);
 	}
-	else if (pid == 0)
+	if (pid == 0)
 	{
 			if (execve(path, comnd, NULL) == -1)
 			{
