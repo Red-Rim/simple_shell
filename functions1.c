@@ -88,7 +88,7 @@ char *cmnd_path(char *command)
 		size_t dir_len = _strlen(dir);
 		size_t command_len = _strlen(command);
 		size_t path_len = dir_len + 1 + command_len + 1;
-		char *command_path = (char*)malloc(path_len);
+		char *command_path = (char *)malloc(path_len);
 
 	if (command_path != NULL)
 	{
@@ -98,7 +98,7 @@ char *cmnd_path(char *command)
 	if (access(command_path, X_OK) == 0)
 	{
 		free(dup);
-		return command_path;
+		return (command_path);
 	}
 	free(command_path);
 	}
@@ -106,7 +106,7 @@ char *cmnd_path(char *command)
 	dir = strtok(NULL, ":");
 	}
 	free(dup);
-	return NULL;
+	return (NULL);
 }
 /**
  * _execve - creat a process and execute a comand
@@ -129,7 +129,7 @@ int _execve(char **comnd)
 	if (pid == -1)
 	{
 		free(path);
-		return(-1);
+		return (-1);
 	}
 	else if (pid == 0)
 	{
@@ -137,7 +137,7 @@ int _execve(char **comnd)
 			{
 				free(path);
 				freetoken(comnd);
-				exit(EXIT_FAILURE);;
+				exit(EXIT_FAILURE);
 			}
 	}
 	else
@@ -148,7 +148,7 @@ int _execve(char **comnd)
 	else
 	{
 		free(path);
-		return(-1);
+		return (-1);
 	}
 	freetoken(comnd);
 	return (0);
