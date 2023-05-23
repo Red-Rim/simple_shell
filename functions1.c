@@ -24,7 +24,7 @@ char *getlinebuffer(void)
 		buffer[_strcspn(buffer, "\n")] = '\0';
 		return (buffer);
 	}
-	return(NULL);
+	return (NULL);
 }
 
 /**
@@ -38,6 +38,7 @@ char **gettoks(char *str, char *deliminer)
 	int i = 0;
 	char **toks = malloc((MAX + 1) * sizeof(char **));
 	char *token;
+
 	token = strtok(str, deliminer);
 
 	while (token != NULL && i < MAX)
@@ -78,34 +79,34 @@ void freetoken(char **tok)
 
 char *cmnd_path(char *command)
 {
-	char* path_env = _getenv("PATH");
-	char* dup = strdup(path_env);
-	char* dir = strtok(dup, ":");
+	char *path_env = _getenv("PATH");
+	char *dup = strdup(path_env);
+	char *dir = strtok(dup, ":");
 
-    while (dir != NULL)
-    {
-        size_t dir_len = _strlen(dir);
-        size_t command_len = _strlen(command);
-        size_t path_len = dir_len + 1 + command_len + 1;
-        char* command_path = (char*)malloc(path_len);
-
-        if (command_path != NULL)
+	while (dir != NULL)
 	{
-            _strcpy(command_path, dir);
-            command_path[dir_len] = '/';
-            _strcpy(command_path + dir_len + 1, command);
-            if (access(command_path, X_OK) == 0)
-	    {
-		 free(dup);
-                return command_path;
-            }
-	    free(command_path);
-        }
+		size_t dir_len = _strlen(dir);
+		size_t command_len = _strlen(command);
+		size_t path_len = dir_len + 1 + command_len + 1;
+		char *command_path = (char*)malloc(path_len);
 
-        dir = strtok(NULL, ":");
-    }
-    free(dup);
-    return NULL;
+	if (command_path != NULL)
+	{
+		_strcpy(command_path, dir);
+		command_path[dir_len] = '/';
+		_strcpy(command_path + dir_len + 1, command);
+	if (access(command_path, X_OK) == 0)
+	{
+		free(dup);
+		return command_path;
+	}
+	free(command_path);
+	}
+
+	dir = strtok(NULL, ":");
+	}
+	free(dup);
+	return NULL;
 }
 /**
  * _execve - creat a process and execute a comand
@@ -117,7 +118,6 @@ int _execve(char **comnd)
 	char *path;
 	pid_t pid;
 	int status;
-
 
 	path = cmnd_path(*comnd);
 	if (path == NULL)
@@ -131,8 +131,8 @@ int _execve(char **comnd)
 		free(path);
 		return(-1);
 	}
-        else if (pid == 0)
-        {
+	else if (pid == 0)
+	{
 			if (execve(path, comnd, NULL) == -1)
 			{
 				free(path);
@@ -141,10 +141,9 @@ int _execve(char **comnd)
 			}
 	}
 	else
-        {
-                wait(&status);
-
-        }
+	{
+		wait(&status);
+	}
 	}
 	else
 	{
