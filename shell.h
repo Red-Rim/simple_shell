@@ -24,7 +24,7 @@ char *_getenv(char *name);
 char *_strcpy(char *dest, char *src);
 char *cmnd_path(char *command);
 int _env(void);
-char* _strdup(char *str);
+char *_strdup(char *str);
 char *getlinebuffer(void);
 
 #endif
