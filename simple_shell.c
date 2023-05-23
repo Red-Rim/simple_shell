@@ -27,19 +27,19 @@ int main(int argc, char *argv[])
 		buffer = getlinebuffer();
 		if (buffer == NULL)
 		{
+			freetoken(cmd);
+                free(buffer);
 			perror("allocation failed");
 			exit(EXIT_FAILURE);
 		}
 		if (_strncmp("\n", buffer, 1) == 0)
 		{
-			free(buffer);
 			continue;
 		}
 		cmd = gettoks(buffer, " ");
 		if (cmd == NULL)
 		{
 			perror("allocation failed");
-			free(buffer);
 			continue;
 		}
 		if (_strncmp("exit", *cmd, 4) == 0)
@@ -51,8 +51,6 @@ int main(int argc, char *argv[])
 		if (_strncmp("env", *cmd, 3) == 0)
 		{
 			_env();
-			freetoken(cmd);
-			free(buffer);
 			continue;
 		}
 		exc = _execve(cmd);
@@ -60,8 +58,6 @@ int main(int argc, char *argv[])
 		{
 			perror("./shell");
 			exc = 0;
-			freetoken(cmd);
-                        free(buffer);
 			continue;
 		}
 		freetoken(cmd);

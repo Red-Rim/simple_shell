@@ -81,20 +81,20 @@ char *cmnd_path(char *command)
 {
 	char* path_env = _getenv("PATH");
 	char* dup = strdup(path_env);
-	char* dir = strtok(dup, ":");
+	char* tmp = strtok(dup, ":");
 
-    while (dir != NULL)
+    while (tmp != NULL)
     {
-        size_t dir_len = _strlen(dir);
+        size_t tmp_len = _strlen(tmp);
         size_t command_len = _strlen(command);
-        size_t path_len = dir_len + 1 + command_len + 1;
+        size_t path_len = tmp_len + 1 + command_len + 1;
         char* command_path = (char*)malloc(path_len);
 
         if (command_path != NULL)
 	{
-            _strcpy(command_path, dir);
-            command_path[dir_len] = '/';
-            _strcpy(command_path + dir_len + 1, command);
+            _strcpy(command_path, tmp);
+            command_path[tmp_len] = '/';
+            _strcpy(command_path + tmp_len + 1, command);
             if (access(command_path, X_OK) == 0)
 	    {
 		 free(dup);
@@ -103,7 +103,7 @@ char *cmnd_path(char *command)
 	    free(command_path);
         }
 
-        dir = strtok(NULL, ":");
+        tmp = strtok(NULL, ":");
     }
     free(dup);
     return NULL;
@@ -122,21 +122,19 @@ int _execve(char **comnd)
 
 	path = cmnd_path(*comnd);
 	if (path == NULL)
-	path = *comnd;
+	{path = *comnd;
 
 	if (access(path, F_OK) == 0)
 	{
 		pid = fork();
 	if (pid == -1)
 	{
-		free(path);
 		return(-1);
 	}
         else if (pid == 0)
         {
 			if (execve(path, comnd, NULL) == -1)
 			{
-				free(path);
 				return(-1);
 			}
 	}
@@ -148,9 +146,41 @@ int _execve(char **comnd)
 	}
 	else
 	{
-		free(path);
 		return(-1);
 	}
-	free(path);
+	return(0);
+	}
+	else
+	{
+		if (access(path, F_OK) == 0)
+        {
+                pid = fork();
+        if (pid == -1)
+        {
+                free(path);
+                return(-1);
+        }
+        else if (pid == 0)
+        {
+                        if (execve(path, comnd, NULL) == -1)
+                        {
+                                free(path);
+                                return(-1);
+                        }
+        }
+        else
+        {
+                wait(&status);
+
+        }
+        }
+        else
+        {
+                free(path);
+                return(-1);
+        }
+
+		free(path);
 	return (0);
+	}
 }
