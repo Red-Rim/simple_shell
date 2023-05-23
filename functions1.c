@@ -23,7 +23,7 @@ char *getlinebuffer(void)
 			write(STDOUT_FILENO, "\n", _strlen("\n"));
 			exit(0); /*exit on "EOF" */
 		}
-		buffer[_strcspn(buffer, "\n")] = '\0';
+	/**	buffer[_strcspn(buffer, "\n")] = '\0';**/
 		return (buffer);
 	}
 	return (NULL);
@@ -146,7 +146,6 @@ int _execve(char **comnd)
 	else
 		return(-1);
 	}
-
 	else
 	{
 		if (access(path, F_OK) == 0)

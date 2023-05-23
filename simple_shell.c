@@ -29,8 +29,15 @@ int main(int argc, char *argv[])
 		}
 		if (_strncmp("\n", buffer, 1) == 0)
 		{
+			free(buffer);
 			continue;
 		}
+		if (_strncmp("\t", buffer, 1) == 0)
+                {
+                        free(buffer);
+                        continue;
+                }
+		buffer[_strcspn(buffer, "\n")] = '\0';
 		cmd = gettoks(buffer, " ");
 		if (cmd == NULL)
 		{
