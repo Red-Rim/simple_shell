@@ -39,7 +39,7 @@ char *getlinebuffer(void)
 char **gettoks(char *str, char *deliminer)
 {
 	int i = 0;
-	char **toks = malloc((MAX + 1) * sizeof(char **));
+	char **toks = malloc((MAX + 1) * sizeof(char *));
 	char *token;
 
 	token = strtok(str, deliminer);
