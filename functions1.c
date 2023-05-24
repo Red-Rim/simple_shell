@@ -116,22 +116,22 @@ char *cmnd_path(char *command)
  * @comnd: the command need to be executed
  * Return: 0 on success , -1 on error or 1 on any other error
  */
-int _execve(char **comnd)
-{	char *path;
+int _execve(char **comnd, char *path)
+{	/*char *path;*/
 	pid_t pid;
 	int status;
 
-	path = cmnd_path(*comnd);
+/*	path = cmnd_path(*comnd);*/
 
 	if (path == NULL)
 	{
 		path = *comnd;
+	}
 	if (access(path, F_OK) == 0)
 	{
 		pid = fork();
 		if (pid == -1)
 		{
-			free(path);
 			return (-1);
 		}
 		else if (pid == 0)
@@ -147,8 +147,8 @@ int _execve(char **comnd)
 	}
 	else
 		return (-1);
-	}
-	else
+
+	/*else
 	{
 		if (access(path, F_OK) == 0)
 		{
@@ -178,5 +178,5 @@ int _execve(char **comnd)
 			free(path);
 			return (-1);
        		}
-	}
+	}*/
 }

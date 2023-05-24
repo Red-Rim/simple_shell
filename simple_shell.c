@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
 	char **cmd = NULL;
 	int exc = 0;
 	int b;
+	char *path;
 
 	if (argc >= 2)
 	{	perror(argv[0]);
@@ -51,11 +52,14 @@ int main(int argc, char *argv[])
 		if (_strncmp("env", *cmd, 3) == 0 && *cmd != NULL)
 		{	_env();
 			continue; }
-		exc = _execve(cmd);
+		path = cmnd_path(*cmd);
+		exc = _execve(cmd, path);
 		if (exc == -1)
 		{	perror("./shell");
 			exc = 0;
 			continue; }
+		if (path == NULL)
+		free(path);
 		freetoken(cmd);
 		free(buffer); }
 	while (mode == 1 && exc == 0);
