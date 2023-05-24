@@ -21,7 +21,7 @@ char *getlinebuffer(void)
 		{
 			free(buffer);
 			write(STDOUT_FILENO, "\n", _strlen("\n"));
-			exit(0); /*exit on "EOF" */
+			exit(EXIT_SUCCESS); /*exit on "EOF" */
 		}
 	/**	buffer[_strcspn(buffer, "\n")] = '\0';**/
 		return (buffer);
