@@ -82,16 +82,16 @@ void freetoken(char **tok)
 
 char *cmnd_path(char *command)
 {
-	char *path_env = _getenv("PATH");
-	char *dup = strdup(path_env);
-	char *tmp = strtok(dup, ":");
+	char* path_env = _getenv("PATH");
+	char* dup = strdup(path_env);
+	char* tmp = strtok(dup, ":");
 
 	while (tmp != NULL)
 	{
 		size_t tmp_len = _strlen(tmp);
 		size_t command_len = _strlen(command);
 		size_t path_len = tmp_len + 1 + command_len + 1;
-		char *command_path = (char *)malloc(path_len);
+		char* command_path = (char*)malloc(path_len);
 
 	if (command_path != NULL)
 	{
@@ -124,40 +124,59 @@ int _execve(char **comnd)
 	path = cmnd_path(*comnd);
 
 	if (path == NULL)
-	{	path = *comnd;
+	{
+		path = *comnd;
 	if (access(path, F_OK) == 0)
-	{	pid = fork();
+	{
+		pid = fork();
 		if (pid == -1)
-		{	free(path);
-			return (-1); }
+		{
+			free(path);
+			return (-1);
+		}
 		else if (pid == 0)
-		if (execve(path, comnd, NULL) == -1)
-			{	return (-1); }
+		{
+			if (execve(path, comnd, NULL) == -1)
+			{
+				return (-1);
+			}
+		}
 		else
 			wait(&status);
-		return (0); }
+		return (0);
+	}
 	else
-		return (-1); }
+		return (-1);
+	}
 	else
 	{
 		if (access(path, F_OK) == 0)
 		{
-		pid = fork();
-		if (pid == -1)
-		{	free(path);
-			return (-1); }
+			pid = fork();
+			if (pid == -1)
+			{
+				free(path);
+				return (-1);
+			}
 		else if (pid == 0)
 		{
-		if (execve(path, comnd, NULL) == -1)
-			{	free(path);
-				return (-1); } }
+			if (execve(path, comnd, NULL) == -1)
+				{
+					free(path);
+					return (-1);
+				}
+		}
 		else
-		wait(&status);
-		free(path);
-		return (0); }
-	else
-	{	free(path);
-		return (-1);
-       	}
-}
+		{
+			wait(&status);
+		}
+			free(path);
+			return (0);
+		}
+		else
+		{
+			free(path);
+			return (-1);
+       		}
+	}
 }
