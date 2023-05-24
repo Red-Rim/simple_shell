@@ -139,6 +139,7 @@ int _execve(char **comnd)
 	else
 		return (-1); }
 	else
+	{
 		if (access(path, F_OK) == 0)
 		{
 		pid = fork();
@@ -156,4 +157,7 @@ int _execve(char **comnd)
 		return (0); }
 	else
 	{	free(path);
-		return (-1); } } }
+		return (-1);
+       	}
+}
+}
