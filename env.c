@@ -8,7 +8,6 @@
 
 int _env(void)
 {
-	extern char **environ;
 	int i;
 
 	for (i = 0; environ[i] != NULL; i++)
@@ -27,7 +26,6 @@ int _env(void)
  */
 char *_getenv(char *name)
 {
-	extern char **environ;
 	int length;
 	int i;
 

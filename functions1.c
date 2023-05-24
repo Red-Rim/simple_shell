@@ -32,6 +32,7 @@ char *getlinebuffer(void)
 /**
  * gettoks - function used to tokenize a string
  * @str: string
+ * @deliminer: delimiter used for tokenizing
  * Return: tokens
  */
 

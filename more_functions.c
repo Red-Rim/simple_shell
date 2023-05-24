@@ -23,8 +23,12 @@ char *_strcpy(char *dest, char *src)
 
 /*--------------------_strdup---------------------*/
 /**
+ * _strdup - Duplicates a string.
+ * @str: The string to duplicate
+ * Return: A pointer to the newly allocated duplicate string,
+ * or NULL if memory allocation fails
  */
-char* _strdup(char *str)
+char *_strdup(char *str)
 {
 	size_t len = _strlen(str) + 1;
 	char *duplicate = malloc(len * sizeof(char *));

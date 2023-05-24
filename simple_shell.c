@@ -7,7 +7,6 @@
  * @argv: array of command-line argument strings
  * Return: return 0 if succes
  */
-
 int main(int argc, char *argv[])
 {	int mode = 1;
 	char *buffer = NULL;
@@ -22,45 +21,33 @@ int main(int argc, char *argv[])
 			write(STDOUT_FILENO, "#cisfun$ ", _strlen("#cisfun$ "));
 		buffer = getlinebuffer();
 		if (buffer == NULL)
-		{
-			perror("allocation failed");
+		{	perror("allocation failed");
 			free(buffer);
-			exit(EXIT_FAILURE);
-		}
+			exit(EXIT_FAILURE); }
 		if (_strncmp("\n", buffer, 1) == 0)
-		{
-			free(buffer);
-			continue;
-		}
+		{	free(buffer);
+			continue; }
 		if (_strncmp("\t", buffer, 1) == 0)
-                {
-                        free(buffer);
-                        continue;
-                }
+		{	free(buffer);
+			continue; }
 		buffer[_strcspn(buffer, "\n")] = '\0';
 		cmd = gettoks(buffer, " ");
 		if (cmd == NULL)
-		{
-			perror("allocation failed");
-			continue;
-		}
+		{	perror("allocation failed");
+			continue; }
 		if (_strncmp("exit", *cmd, 4) == 0 && *cmd != NULL)
 		{	freetoken(cmd);
 			free(buffer);
 			exit(EXIT_SUCCESS); }
 		if (_strncmp("env", *cmd, 3) == 0 && *cmd != NULL)
-		{
-			_env();
-			continue;
-		}
+		{	_env();
+			continue; }
 		exc = _execve(cmd);
 		if (exc == -1)
 		{	perror("./shell");
 			exc = 0;
-			continue;
-		}
+			continue; }
 		freetoken(cmd);
-		free(buffer);
-       	}while (mode == 1 && exc == 0);
-	return (0);
-}
+		free(buffer); }
+	while (mode == 1 && exc == 0);
+	return (0); }
