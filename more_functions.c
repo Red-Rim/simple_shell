@@ -62,13 +62,19 @@ int _isdigit(int a)
 
 int _isstrdigit(char *str)
 {
+	int i = 0;
+
 	if (str == NULL)
 		return (0);
-	while (*str)
+	while (str[i])
 	{
-		if (!_isdigit(*str))
+		if (str[i] == '-' && i == 0)
+		{	i++;
+			continue;
+		}
+		else if (!_isdigit(str[i]))
 			return (0);
-		str++;
+		i++;
 	}
 	return (1);
 }
