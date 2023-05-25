@@ -29,12 +29,9 @@ char *cmnd_path(char *command);
 int _env(void);
 char *_strdup(char *str);
 char *getlinebuffer(void);
-<<<<<<< HEAD
 int _setenv(const char *name, const char *value);
 int _unsetenv(const char *name);
-
-=======
 void _eexit(char **cmd, char *buffer, int a);
 void argc(int argc, char *argv[]);
->>>>>>> 9d1849a9ecbc075861e326dddc09b38aa0b2c51f
+
 #endif
