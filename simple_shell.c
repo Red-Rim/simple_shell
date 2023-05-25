@@ -46,8 +46,6 @@ int main(int argc, char *argv[])
 						b = 2;
 				exit(b);
 			}
-			if (path !=NULL)
-				free(path);
 			freetoken(cmd);
 			free(buffer);
 			exit(0); }
