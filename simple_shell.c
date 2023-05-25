@@ -44,6 +44,8 @@ int main(int argc, char *argv[])
 				b = atoi(cmd[1]);
 					if (b <= -1)
 						b = 2;
+				freetoken(cmd);
+				free(buffer);
 				exit(b);
 			}
 			freetoken(cmd);
