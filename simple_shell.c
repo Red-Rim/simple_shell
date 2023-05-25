@@ -15,17 +15,11 @@ int main(int argc, char *argv[])
 	int b, a = 0;
 	char *path;
 
-	if (argc >= 2)
-	{	perror(argv[0]);
-		exit(-1); }
+/*	argc(argc, argv);*/
 	do {	mode = isatty(STDIN_FILENO);
 		if (mode == 1)
 			write(STDOUT_FILENO, "#cisfun$ ", _strlen("#cisfun$ "));
 		buffer = getlinebuffer();
-		if (buffer == NULL)
-		{	perror("allocation failed");
-			free(buffer);
-			exit(EXIT_FAILURE); }
 		if (_strncmp("\n", buffer, 1) == 0)
 		{	free(buffer);
 			continue; }
@@ -38,19 +32,7 @@ int main(int argc, char *argv[])
 		{	perror("allocation failed");
 			continue; }
 		if (_strncmp("exit", *cmd, 4) == 0 && *cmd != NULL)
-		{
-			if (cmd[1])
-			{
-				b = atoi(cmd[1]);
-					if (b <= -1)
-						b = 2;
-				freetoken(cmd);
-				free(buffer);
-				exit(b);
-			}
-			freetoken(cmd);
-			free(buffer);
-			exit(a); }
+			_eexit(cmd, buffer, a);
 		if (_strncmp("env", *cmd, 3) == 0 && *cmd != NULL)
 		{	_env();
 			freetoken(cmd);

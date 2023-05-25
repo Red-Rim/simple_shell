@@ -11,6 +11,8 @@
 
 #define MAX 9
 
+extern char **environ;
+
 /*Red-Rim & Fatimazahraker*/
 
 int _putchar(char c);
@@ -27,5 +29,6 @@ char *cmnd_path(char *command);
 int _env(void);
 char *_strdup(char *str);
 char *getlinebuffer(void);
-
+void _eexit(char **cmd, char *buffer, int a);
+void argc(int argc, char *argv[]);
 #endif
