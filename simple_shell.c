@@ -44,6 +44,10 @@ int main()
 		if (exc != 0)
 		{	perror("./shell");
 			exc = 0;
+			freetoken(cmd);
+			free(buffer);
+			if (path != NULL)
+                free(path);
 			continue; }
 		if (path != NULL)
 		free(path);
