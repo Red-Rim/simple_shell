@@ -18,16 +18,17 @@ int main()
 		if (mode == 1)
 			write(STDOUT_FILENO, "#cisfun$ ", _strlen("#cisfun$ "));
 		buffer = getlinebuffer();
-		if (_strncmp("\n", buffer, 1) == 0)
+		/*if (_strncmp("\n", buffer, 1) == 0)
 		{	free(buffer);
 			continue; }
 		if (_strncmp("\t", buffer, 1) == 0)
 		{	free(buffer);
-			continue; }
+			continue; }*/
 		buffer[_strcspn(buffer, "\n")] = '\0';
-		cmd = gettoks(buffer, " ");
-		if (cmd == NULL)
-		{	perror("allocation failed");
+		cmd = gettoks(buffer, " \t\n");
+		if (*cmd == NULL)
+		{	free(buffer);
+			freetoken(cmd);
 			continue; }
 		if (_strncmp("exit", *cmd, 4) == 0 && *cmd != NULL)
 			_eexit(cmd, buffer, a);
