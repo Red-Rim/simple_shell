@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <stddef.h>
 #include <sys/wait.h>
+#include <errno.h>
 
 #define MAX 9
 

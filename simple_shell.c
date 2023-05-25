@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 	char *buffer = NULL;
 	char **cmd = NULL;
 	int exc = 0;
-	int b;
+	int b, a;
 	char *path;
 
 	if (argc >= 2)
@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
 			}
 			freetoken(cmd);
 			free(buffer);
-			exit(0); }
+			exit(a); }
 		if (_strncmp("env", *cmd, 3) == 0 && *cmd != NULL)
 		{	_env();
 			freetoken(cmd);
@@ -58,7 +58,8 @@ int main(int argc, char *argv[])
 			continue; }
 		path = cmnd_path(*cmd);
 		exc = _execve(cmd, path);
-		if (exc == -1)
+		a = exc;
+		if (exc != 0)
 		{	perror("./shell");
 			exc = 0;
 			continue; }

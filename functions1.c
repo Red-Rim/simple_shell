@@ -132,13 +132,13 @@ int _execve(char **comnd, char *path)
 		pid = fork();
 		if (pid == -1)
 		{
-			return (-1);
+			return (errno);
 		}
 		else if (pid == 0)
 		{
 			if (execve(path, comnd, NULL) == -1)
 			{
-				return (-1);
+				return (errno);
 			}
 		}
 		else
@@ -146,7 +146,7 @@ int _execve(char **comnd, char *path)
 		return (0);
 	}
 	else
-		return (-1);
+		return (errno);
 
 	/*else
 	{
