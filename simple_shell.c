@@ -51,6 +51,8 @@ int main(int argc, char *argv[])
 			exit(0); }
 		if (_strncmp("env", *cmd, 3) == 0 && *cmd != NULL)
 		{	_env();
+			freetoken(cmd);
+			free(buffer);
 			continue; }
 		path = cmnd_path(*cmd);
 		exc = _execve(cmd, path);
