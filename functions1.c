@@ -150,6 +150,7 @@ int _execve(char **comnd, char *path)
 			wait(&status);
 		return(WEXITSTATUS(status));
 		}
+		return(0);
 	}
 	else
 		return (errno);

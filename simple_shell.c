@@ -7,12 +7,12 @@
  * @argv: array of command-line argument strings
  * Return: return 0 if succes
  */
-int main(int argc, char *argv[])
+int main()
 {	int mode = 1;
 	char *buffer = NULL;
 	char **cmd = NULL;
 	int exc = 0;
-	int b, a = 0;
+	int a = 0;
 	char *path;
 
 /*	argc(argc, argv);*/
