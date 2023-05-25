@@ -146,11 +146,9 @@ int _execve(char **comnd, char *path)
 			}
 		}
 		else
-		{
 			wait(&status);
 		return(WEXITSTATUS(status));
-		}
-		return(0);
+
 	}
 	else
 		return (errno);
