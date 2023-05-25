@@ -32,31 +32,20 @@ int main(int argc, char *argv[])
 		{	perror("allocation failed");
 			continue; }
 		if (_strncmp("exit", *cmd, 4) == 0 && *cmd != NULL)
-<<<<<<< HEAD
-		{
-			/**if (cmd[1])
-			{
-				b = atoi(cmd[1]);
-					if (b <= -1)
-						b = 2;
-				exit(b);
-			}*/
-			freetoken(cmd);
-			free(buffer);
-			exit(0); }
-=======
 			_eexit(cmd, buffer, a);
->>>>>>> 9d1849a9ecbc075861e326dddc09b38aa0b2c51f
 		if (_strncmp("env", *cmd, 3) == 0 && *cmd != NULL)
 		{	_env();
+			freetoken(cmd);
+			free(buffer);
 			continue; }
 		path = cmnd_path(*cmd);
 		exc = _execve(cmd, path);
-		if (exc == -1)
+		a = exc;
+		if (exc != 0)
 		{	perror("./shell");
 			exc = 0;
 			continue; }
-		if (path == NULL)
+		if (path != NULL)
 		free(path);
 		freetoken(cmd);
 		free(buffer); }
