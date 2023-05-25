@@ -40,3 +40,35 @@ char *_strdup(char *str)
 
 	return (_strcpy(duplicate, str));
 }
+
+/**
+ * _isdigit - check a char if number
+ * @a: interger
+ * Return: 1 or 0
+ */
+int _isdigit(int a)
+{
+        if (a >= '0' && a <= '9')
+                return (1);
+        else
+                return (0);
+}
+
+/**
+ * _isstrdigit: check if astring is digit;
+ * @str: string to check
+ * Return: 1 in success or 0
+ */
+
+int _isstrdigit( char *str)
+{
+	if (str == NULL)
+		return (0);
+	while (*str)
+	{
+		if (!_isdigit(*str))
+			return(0);
+		str++;
+	}
+	return (1);
+}

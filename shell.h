@@ -33,5 +33,7 @@ int _setenv(const char *name, const char *value);
 int _unsetenv(const char *name);
 void _eexit(char **cmd, char *buffer, int a);
 void argc(int argc, char *argv[]);
+int _isstrdigit( char *str);
+int _isdigit(int a);
 
 #endif
