@@ -14,18 +14,12 @@ char *getlinebuffer(void)
 	ssize_t read = 0;
 
 	buffer = malloc(bufsize * sizeof(char));
-	if (buffer == NULL)
-	{
-		perror("allocation failed");
-		exit(-1);
-	}
-	else
+	if (buffer != NULL)
 	{
 		read = getline(&buffer, &bufsize, stdin);
 		if (read == -1)
 		{
 			free(buffer);
-			write(STDOUT_FILENO, "\n", _strlen("\n"));
 			exit(0); /*exit on "EOF" */
 		}
 	/**	buffer[_strcspn(buffer, "\n")] = '\0';**/
@@ -119,6 +113,7 @@ char *cmnd_path(char *command)
 /**
  * _execve - creat a process and execute a comand
  * @comnd: the command need to be executed
+ * @path: path
  * Return: 0 on success , -1 on error or 1 on any other error
  */
 int _execve(char **comnd, char *path)
@@ -126,6 +121,7 @@ int _execve(char **comnd, char *path)
 	pid_t pid;
 	int status;
 
+/*	path = cmnd_path(*comnd);*/
 
 	if (path == NULL)
 	{
@@ -147,8 +143,7 @@ int _execve(char **comnd, char *path)
 		}
 		else
 			wait(&status);
-		return(WEXITSTATUS(status));
-
+		return (0);
 	}
 	else
 		return (errno);

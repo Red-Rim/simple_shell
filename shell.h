@@ -26,14 +26,14 @@ int _execve(char **comnd, char *path);
 char *_getenv(char *name);
 char *_strcpy(char *dest, char *src);
 char *cmnd_path(char *command);
-int _env(void);
+int _env(char **cmd, char *buffer);
 char *_strdup(char *str);
 char *getlinebuffer(void);
 int _setenv(const char *name, const char *value);
 int _unsetenv(const char *name);
 void _eexit(char **cmd, char *buffer, int a);
 void argc(int argc, char *argv[]);
-int _isstrdigit( char *str);
+int _isstrdigit(char *str);
 int _isdigit(int a);
 
 #endif

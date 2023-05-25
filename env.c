@@ -6,7 +6,7 @@
  * Return: 0 on success
  */
 
-int _env(void)
+int _env(char **cmd, char *buffer)
 {
 	int i;
 
@@ -15,6 +15,8 @@ int _env(void)
 		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
 		write(STDOUT_FILENO, "\n", 1);
 	}
+	freetoken(cmd);
+	free(buffer);
 	return (0);
 }
 

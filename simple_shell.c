@@ -8,15 +8,13 @@
  * Return: return 0 if succes
  */
 int main()
-{	int mode = 1;
-	char *buffer = NULL;
+{	char *buffer = NULL;
 	char **cmd = NULL;
-	int exc = 0;
-	int a = 0;
+	int exc = 0, a = 0, mode = 1;
 	char *path;
 
-/*	argc(argc, argv);*/
-	do {	mode = isatty(STDIN_FILENO);
+	while (1)
+	{	mode = isatty(STDIN_FILENO);
 		if (mode == 1)
 			write(STDOUT_FILENO, "#cisfun$ ", _strlen("#cisfun$ "));
 		buffer = getlinebuffer();
@@ -34,24 +32,20 @@ int main()
 		if (_strncmp("exit", *cmd, 4) == 0 && *cmd != NULL)
 			_eexit(cmd, buffer, a);
 		if (_strncmp("env", *cmd, 3) == 0 && *cmd != NULL)
-		{	_env();
-			freetoken(cmd);
-			free(buffer);
+		{	_env(cmd, buffer);
 			continue; }
 		path = cmnd_path(*cmd);
 		exc = _execve(cmd, path);
 		a = exc;
 		if (exc != 0)
 		{	perror("./shell");
-			exc = 0;
 			freetoken(cmd);
 			free(buffer);
 			if (path != NULL)
-                free(path);
+                	free(path);
 			continue; }
 		if (path != NULL)
 		free(path);
 		freetoken(cmd);
 		free(buffer); }
-	while (mode == 1 && exc == 0);
 	return (0); }

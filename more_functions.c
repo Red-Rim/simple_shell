@@ -48,10 +48,10 @@ char *_strdup(char *str)
  */
 int _isdigit(int a)
 {
-        if (a >= '0' && a <= '9')
-                return (1);
-        else
-                return (0);
+	if (a >= '0' && a <= '9')
+	return (1);
+	else
+	return (0);
 }
 
 /**
@@ -60,14 +60,14 @@ int _isdigit(int a)
  * Return: 1 in success or 0
  */
 
-int _isstrdigit( char *str)
+int _isstrdigit(char *str)
 {
 	if (str == NULL)
 		return (0);
 	while (*str)
 	{
 		if (!_isdigit(*str))
-			return(0);
+			return (0);
 		str++;
 	}
 	return (1);

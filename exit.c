@@ -2,17 +2,21 @@
 
 /**
  * _exit: exit shell
+ * @cmd: command
+ * @buffer: buffer
+ * @a: integer status
  * Return: void
  */
 
-void _eexit(char **cmd, char *buffer, int a) 
+void _eexit(char **cmd, char *buffer, int a)
 {
 	int b;
+
 	if (cmd[1])
 	{
 		b = atoi(cmd[1]);
-		/*if (_isstrdigit(cmd[1]) == 0)
-			b = 2;*/
+		if (_isstrdigit(cmd[1]) == 0)
+			b = 2;
 		perror("exit");
 		if (b <= -1)
 			b = 2;
