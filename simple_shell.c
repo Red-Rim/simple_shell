@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 	char *buffer = NULL;
 	char **cmd = NULL;
 	int exc = 0;
-	int b, a;
+	int b, a = 0;
 	char *path;
 
 	if (argc >= 2)
