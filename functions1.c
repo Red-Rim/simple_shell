@@ -117,11 +117,10 @@ char *cmnd_path(char *command)
  * Return: 0 on success , -1 on error or 1 on any other error
  */
 int _execve(char **comnd, char *path)
-{	/*char *path;*/
+{
 	pid_t pid;
 	int status;
 
-/*	path = cmnd_path(*comnd);*/
 
 	if (path == NULL)
 	{
@@ -141,9 +140,8 @@ int _execve(char **comnd, char *path)
 				return (errno);
 			}
 		}
-		else
-			wait(&status);
-		return (0);
+		wait(&status);
+		return (WEXITSTATUS(status));
 	}
 	else
 		return (errno);
