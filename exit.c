@@ -13,7 +13,7 @@ void _eexit(char **cmd, char *buffer, int a)
 		b = atoi(cmd[1]);
 		if (_isstrdigit(cmd[1]) == 0)
 			b = 2;
-		perror("exit: Illegal number");
+		perror("exit");
 		if (b <= -1)
 			b = 2;
 
