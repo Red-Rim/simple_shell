@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 	char *buffer = NULL;
 	char **cmd = NULL;
 	int exc = 0;
-	int b, a = 0;
+	int b;
 	char *path;
 
 	if (argc >= 2)
@@ -39,31 +39,26 @@ int main(int argc, char *argv[])
 			continue; }
 		if (_strncmp("exit", *cmd, 4) == 0 && *cmd != NULL)
 		{
-			if (cmd[1])
+			/**if (cmd[1])
 			{
 				b = atoi(cmd[1]);
 					if (b <= -1)
 						b = 2;
-				freetoken(cmd);
-				free(buffer);
 				exit(b);
-			}
+			}*/
 			freetoken(cmd);
 			free(buffer);
-			exit(a); }
+			exit(0); }
 		if (_strncmp("env", *cmd, 3) == 0 && *cmd != NULL)
 		{	_env();
-			freetoken(cmd);
-			free(buffer);
 			continue; }
 		path = cmnd_path(*cmd);
 		exc = _execve(cmd, path);
-		a = exc;
-		if (exc != 0)
+		if (exc == -1)
 		{	perror("./shell");
 			exc = 0;
 			continue; }
-		if (path != NULL)
+		if (path == NULL)
 		free(path);
 		freetoken(cmd);
 		free(buffer); }

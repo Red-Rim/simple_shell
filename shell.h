@@ -27,5 +27,7 @@ char *cmnd_path(char *command);
 int _env(void);
 char *_strdup(char *str);
 char *getlinebuffer(void);
+int _setenv(const char *name, const char *value);
+int _unsetenv(const char *name);
 
 #endif
