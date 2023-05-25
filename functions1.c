@@ -14,7 +14,12 @@ char *getlinebuffer(void)
 	ssize_t read = 0;
 
 	buffer = malloc(bufsize * sizeof(char));
-	if (buffer != NULL)
+	if (buffer == NULL)
+	{
+		perror("allocation failed");
+		exit(-1);
+	}
+	else
 	{
 		read = getline(&buffer, &bufsize, stdin);
 		if (read == -1)
@@ -82,16 +87,16 @@ void freetoken(char **tok)
 
 char *cmnd_path(char *command)
 {
-	char* path_env = _getenv("PATH");
-	char* dup = strdup(path_env);
-	char* tmp = strtok(dup, ":");
+	char *path_env = _getenv("PATH");
+	char *dup = strdup(path_env);
+	char *tmp = strtok(dup, ":");
 
 	while (tmp != NULL)
 	{
 		size_t tmp_len = _strlen(tmp);
 		size_t command_len = _strlen(command);
 		size_t path_len = tmp_len + 1 + command_len + 1;
-		char* command_path = (char*)malloc(path_len);
+		char *command_path = (char *)malloc(path_len);
 
 	if (command_path != NULL)
 	{
@@ -121,7 +126,6 @@ int _execve(char **comnd, char *path)
 	pid_t pid;
 	int status;
 
-/*	path = cmnd_path(*comnd);*/
 
 	if (path == NULL)
 	{
@@ -142,41 +146,11 @@ int _execve(char **comnd, char *path)
 			}
 		}
 		else
+		{
 			wait(&status);
-		return (0);
+		return(WEXITSTATUS(status));
+		}
 	}
 	else
 		return (errno);
-
-	/*else
-	{
-		if (access(path, F_OK) == 0)
-		{
-			pid = fork();
-			if (pid == -1)
-			{
-				free(path);
-				return (-1);
-			}
-		else if (pid == 0)
-		{
-			if (execve(path, comnd, NULL) == -1)
-				{
-					free(path);
-					return (-1);
-				}
-		}
-		else
-		{
-			wait(&status);
-		}
-			free(path);
-			return (0);
-		}
-		else
-		{
-			free(path);
-			return (-1);
-       		}
-	}*/
 }
