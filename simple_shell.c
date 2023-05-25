@@ -18,12 +18,6 @@ int main()
 		if (mode == 1)
 			write(STDOUT_FILENO, "#cisfun$ ", _strlen("#cisfun$ "));
 		buffer = getlinebuffer();
-		/*if (_strncmp("\n", buffer, 1) == 0)
-		{	free(buffer);
-			continue; }
-		if (_strncmp("\t", buffer, 1) == 0)
-		{	free(buffer);
-			continue; }*/
 		buffer[_strcspn(buffer, "\n")] = '\0';
 		cmd = gettoks(buffer, " \t\n");
 		if (*cmd == NULL)
