@@ -20,7 +20,7 @@ void _eexit(char **cmd, char *buffer, int a)
 		}
 		else
 		{
-		write(STDERR_FILENO, "Invalid arg for exit\n", _strlen("Invalid arg for exit\n"));
+		perror("Invalid arg for exit");
 		}
 	}
 	freetoken(cmd);
