@@ -43,6 +43,18 @@ int main()
 		freetoken(cmd);
 		free(buffer);
 		continue; }
+		if (_strncmp("cd", *cmd, 2) == 0)
+		{
+			if (cmd[1] == NULL || _strncmp("-", cmd[1], 1) == 0)
+			{	char *home = _getenv("HOME");
+
+				if (home != NULL)
+					_cd(home); }
+			else
+				_cd(cmd[1]);
+			freetoken(cmd);
+			free(buffer);
+			continue; }
 		path = cmnd_path(*cmd);
 		exc = _execve(cmd, path);
 		a = exc;
