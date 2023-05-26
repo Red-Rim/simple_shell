@@ -29,6 +29,20 @@ int main()
 		if (_strncmp("env", *cmd, 3) == 0 && *cmd != NULL)
 		{	_env(cmd, buffer);
 			continue; }
+		if (_strncmp("setenv", *cmd, 6) == 0 && cmd[1] != NULL && cmd[2] != NULL)
+		{
+			if (_setenv(cmd[1], cmd[2]) == -1)
+			{	perror("Error: Failed to set env varbl"); }
+			freetoken(cmd);
+			free(buffer);
+			continue; }
+		if (_strncmp("unsetenv", *cmd, 8) == 0 && cmd[1] != NULL)
+		{
+			if (_unsetenv(cmd[1] == -1)
+			{	perroe("Error: Failed to unset env varbl"); }
+				freetoken(cmd);
+				free(buffer);
+				continue; }
 		path = cmnd_path(*cmd);
 		exc = _execve(cmd, path);
 		a = exc;
@@ -37,7 +51,7 @@ int main()
 			freetoken(cmd);
 			free(buffer);
 			if (path != NULL)
-                	free(path);
+			free(path);
 			continue; }
 		if (path != NULL)
 		free(path);
