@@ -38,5 +38,9 @@ int _isstrdigit(char *str);
 int _isdigit(int a);
 int _cd(const char *path);
 char *_getenv(const char *name);
+void execd(char **cmd, char *buffer, char *path);
+void excunsetenv(char **cmd, char *path, char *buffer);
+void execseten(char **cmd, char *path, char *buffer);
+void _isatty();
 
 #endif

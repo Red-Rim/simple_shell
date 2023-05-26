@@ -51,7 +51,6 @@ char **gettoks(char *str, char *deliminer)
 		i++;
 	}
 	toks[i] = NULL;
-
 	return (toks);
 
 }

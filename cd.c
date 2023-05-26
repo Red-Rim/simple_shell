@@ -24,3 +24,20 @@ int _cd(const char *path)
     perror("getcwd");
     return -1;
 }
+
+/**
+ *
+ *
+ */
+void execd(char **cmd, char *buffer, char *path)
+{
+	(void)path;
+	if (cmd[1] == NULL || _strncmp("-", cmd[1], 1) == 0)
+                        {       char *home = _getenv("HOME");
+
+                                if (home != NULL)
+                                        _cd(home); }
+                        else
+                                _cd(cmd[1]);
+			freetoken(cmd, NULL, buffer);
+}

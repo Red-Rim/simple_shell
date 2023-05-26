@@ -35,3 +35,27 @@ int _unsetenv(const char *name)
 	}
 return (0);
 }
+/**
+ *
+ *
+ */
+void excunsetenv(char **cmd, char *path, char *buffer)
+{
+	(void)path;
+	if (_unsetenv(cmd[1]) == -1)
+                        {       perror("Error: failed to unset env varbl"); }
+                freetoken(cmd, NULL, buffer);
+}
+
+/**
+ *
+ */
+
+void execseten(char **cmd, char *path, char *buffer)
+{
+	(void)path;
+	if (_setenv(cmd[1], cmd[2]) == -1)
+                        {       perror("Error: failed to set varbl"); }
+                        freetoken(cmd, NULL, buffer);
+}
+
