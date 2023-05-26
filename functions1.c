@@ -137,11 +137,17 @@ int _execve(char **comnd, char *path)
 		{
 			if (execve(path, comnd, NULL) == -1)
 			{
-				return (errno);
+				perror(path);
+				exit(2);
 			}
 		}
 		wait(&status);
-		return (WEXITSTATUS(status));
+		if (WIFEXITED(status))
+			return (WEXITSTATUS(status));
+		else if (WIFSIGNALED(status))
+			return (WTERMSIG(status));
+		else
+			return (1);
 	}
 	else
 		return (errno);
