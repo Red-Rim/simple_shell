@@ -1,7 +1,7 @@
 #include "shell.h"
 
 
-/**
+/*Red_Rim & fatimazahraker */
  * _env - print the environment variables
  * @cmd: commnd
  * @buffer: buffer
