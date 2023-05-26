@@ -22,6 +22,7 @@ void _eexit(char **cmd, char *buffer,char *path, int a)
 		}
 		else
 		{
+			exit-status = 2
 		perror("Invalid arg for exit");
 		}
 	}
