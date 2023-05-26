@@ -10,23 +10,20 @@
 
 void _eexit(char **cmd, char *buffer, int a)
 {
-	int b;
+	int exit_status = a;
 
-	if (cmd[1])
+	if (cmd[1] != NULL)
 	{
-		if (_isstrdigit(cmd[1]) == 0)
-		{	b = 2;
-			perror("exit");
+		if (_isstrdigit(cmd[1]))
+		{
+			exit_status = atoi(cmd[1]);
 		}
 		else
-		
-		b = atoi(cmd[1]);
-		
-		freetoken(cmd);
-		free(buffer);
-		exit(b);
+		{
+		write(STDERR_FILENO, "Invalid arg for exit\n", _strlen("Invalid arg for exit\n"));
+		}
 	}
 	freetoken(cmd);
 	free(buffer);
-	exit(a);
+	exit(exit_status);
 }
