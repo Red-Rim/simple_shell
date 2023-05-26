@@ -3,12 +3,19 @@
 
 /**
  * _env - print the environment variables
- * Return: 0 on success
+ * @cmd: commnd
+ * @buffer: buffer
+ * @path: path
+ * @a: status
+ * Return: void
  */
 
-int _env(char **cmd, char *buffer)
+void _env(char **cmd, char *buffer, char *path, int a)
 {
 	int i;
+
+	(void)path;
+	(void)a;
 
 	for (i = 0; environ[i] != NULL; i++)
 	{
@@ -17,7 +24,6 @@ int _env(char **cmd, char *buffer)
 	}
 	freetoken(cmd);
 	free(buffer);
-	return (0);
 }
 
 /*------------------_getenv-------------------*/

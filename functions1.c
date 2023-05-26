@@ -142,12 +142,12 @@ int _execve(char **comnd, char *path)
 			}
 		}
 		wait(&status);
-		if (WIFEXITED(status))
+		/*if (WIFEXITED(status))*/
 			return (WEXITSTATUS(status));
-		else if (WIFSIGNALED(status))
+		/*else if (WIFSIGNALED(status))
 			return (WTERMSIG(status));
 		else
-			return (errno);
+			return (errno);*/
 	}
 	else
 		return (errno);

@@ -8,7 +8,7 @@
  * Return: void
  */
 
-void _eexit(char **cmd, char *buffer, int a)
+void _eexit(char **cmd, char *buffer,char *path, int a)
 {
 	int exit_status = a;
 
@@ -23,6 +23,8 @@ void _eexit(char **cmd, char *buffer, int a)
 		perror("Invalid arg for exit");
 		}
 	}
+	if (path != NULL)
+		free(path);
 	freetoken(cmd);
 	free(buffer);
 	exit(exit_status);

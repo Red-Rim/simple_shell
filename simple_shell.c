@@ -11,7 +11,7 @@ int main()
 {	char *buffer = NULL;
 	char **cmd = NULL;
 	int exc = 0, a = 0, mode = 1;
-	char *path;
+	char *path = NULL;
 
 	while (1)
 	{	mode = isatty(STDIN_FILENO);
@@ -25,11 +25,11 @@ int main()
 			freetoken(cmd);
 			continue; }
 		if (_strncmp("exit", *cmd, 4) == 0 && *cmd != NULL)
-			_eexit(cmd, buffer, a);
+			_eexit(cmd, buffer, path, a);
 		if (_strncmp("env", *cmd, 3) == 0 && *cmd != NULL)
-		{	_env(cmd, buffer);
+		{	_env(cmd, buffer, path, a);
 			continue; }
-		/*if (_strncmp("setenv", *cmd, 6) == 0 && cmd[1] != NULL && cmd[2] != NULL)
+		if (_strncmp("setenv", *cmd, 6) == 0 && cmd[1] != NULL && cmd[2] != NULL)
 		{
 			if (_setenv(cmd[1], cmd[2]) == -1)
 			{	perror("Error: failed to set varbl"); }
@@ -42,7 +42,7 @@ int main()
 			{	perror("Error: failed to unset env varbl"); }
 		freetoken(cmd);
 		free(buffer);
-		continue; }*/
+		continue; }
 		path = cmnd_path(*cmd);
 		exc = _execve(cmd, path);
 		a = exc;
