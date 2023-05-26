@@ -138,7 +138,7 @@ int _execve(char **comnd, char *path)
 			if (execve(path, comnd, NULL) == -1)
 			{
 				perror(path);
-				exit(2);
+				return(errno);
 			}
 		}
 		wait(&status);
@@ -147,7 +147,7 @@ int _execve(char **comnd, char *path)
 		else if (WIFSIGNALED(status))
 			return (WTERMSIG(status));
 		else
-			return (1);
+			return (errno);
 	}
 	else
 		return (errno);
