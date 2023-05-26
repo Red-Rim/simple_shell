@@ -1,4 +1,5 @@
 #include "shell.h"
+/*Red-Rim & fatimazahraker*/
 /**
  * _setenv - initialize a new env varbl or modify an existing one
  * @name: name of the env varb
