@@ -22,7 +22,7 @@ char *getlinebuffer(void)
 			free(buffer);
 			exit(0); /*exit on "EOF" */
 		}
-	/**	buffer[_strcspn(buffer, "\n")] = '\0';**/
+		buffer[_strcspn(buffer, "\n")] = '\0';
 		return (buffer);
 	}
 	return (NULL);
@@ -61,7 +61,7 @@ char **gettoks(char *str, char *deliminer)
  * @tok: string
  */
 
-void freetoken(char **tok)
+void freetoken(char **tok, char *path, char *buffer)
 {
 	int i = 0;
 
@@ -72,6 +72,9 @@ void freetoken(char **tok)
 	}
 
 	free(tok);
+	free(buffer);
+	if (path != NULL)
+	free(path);
 }
 /**
  * cmnd_path - path of command
@@ -138,16 +141,11 @@ int _execve(char **comnd, char *path)
 			if (execve(path, comnd, NULL) == -1)
 			{
 				perror(path);
-				return(errno);
+				return (errno);
 			}
 		}
 		wait(&status);
-		/*if (WIFEXITED(status))*/
 			return (WEXITSTATUS(status));
-		/*else if (WIFSIGNALED(status))
-			return (WTERMSIG(status));
-		else
-			return (errno);*/
 	}
 	else
 		return (errno);

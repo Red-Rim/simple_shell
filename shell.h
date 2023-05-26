@@ -22,7 +22,7 @@ int _strlen(char *s);
 char **gettoks(char *str, char *deliminer);
 int _strncmp(const char *s1, const char *s2, size_t n);
 size_t _strcspn(const char *s1, const char *s2);
-void freetoken(char **tok);
+void freetoken(char **tok, char *path, char *buffer);
 int _execve(char **comnd, char *path);
 char *_getenv(char *name);
 char *_strcpy(char *dest, char *src);

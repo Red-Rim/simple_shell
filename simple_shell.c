@@ -18,11 +18,9 @@ int main()
 		if (mode == 1)
 			write(STDOUT_FILENO, "#cisfun$ ", _strlen("#cisfun$ "));
 		buffer = getlinebuffer();
-		buffer[_strcspn(buffer, "\n")] = '\0';
 		cmd = gettoks(buffer, " \t\n");
 		if (*cmd == NULL)
-		{	free(buffer);
-			freetoken(cmd);
+		{	freetoken(cmd, path, buffer);
 			continue; }
 		if (_strncmp("exit", *cmd, 4) == 0 && *cmd != NULL)
 			_eexit(cmd, buffer, path, a);
@@ -33,28 +31,20 @@ int main()
 		{
 			if (_setenv(cmd[1], cmd[2]) == -1)
 			{	perror("Error: failed to set varbl"); }
-			freetoken(cmd);
-			free(buffer);
+			freetoken(cmd, path, buffer);
 			continue; }
 		if (_strncmp("unsetenv", *cmd, 8) == 0 && cmd[1] != NULL)
 		{
 			if (_unsetenv(cmd[1]) == -1)
 			{	perror("Error: failed to unset env varbl"); }
-		freetoken(cmd);
-		free(buffer);
+		freetoken(cmd, path, buffer);
 		continue; }
 		path = cmnd_path(*cmd);
 		exc = _execve(cmd, path);
 		a = exc;
 		if (exc != 0)
 		{	perror("./shell");
-			freetoken(cmd);
-			free(buffer);
-			if (path != NULL)
-			free(path);
+			freetoken(cmd, path, buffer);
 			continue; }
-		if (path != NULL)
-		free(path);
-		freetoken(cmd);
-		free(buffer); }
+		freetoken(cmd, path, buffer); }
 	return (0); }

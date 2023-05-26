@@ -17,6 +17,7 @@ int _setenv(const char *name, const char *value)
 	}
 	return (0);
 }
+
  /**
   * _unsetenv - remove an env varbl
   * @name: name of the env  varbl to unset

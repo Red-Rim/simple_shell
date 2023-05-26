@@ -14,7 +14,6 @@ void _env(char **cmd, char *buffer, char *path, int a)
 {
 	int i;
 
-	(void)path;
 	(void)a;
 
 	for (i = 0; environ[i] != NULL; i++)
@@ -22,8 +21,7 @@ void _env(char **cmd, char *buffer, char *path, int a)
 		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
 		write(STDOUT_FILENO, "\n", 1);
 	}
-	freetoken(cmd);
-	free(buffer);
+	freetoken(cmd, path, buffer);
 }
 
 /*------------------_getenv-------------------*/

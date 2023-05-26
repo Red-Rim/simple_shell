@@ -12,6 +12,8 @@ void _eexit(char **cmd, char *buffer,char *path, int a)
 {
 	int exit_status = a;
 
+	(void)path;
+
 	if (cmd[1] != NULL)
 	{
 		if (_isstrdigit(cmd[1]))
@@ -23,9 +25,6 @@ void _eexit(char **cmd, char *buffer,char *path, int a)
 		perror("Invalid arg for exit");
 		}
 	}
-	if (path != NULL)
-		free(path);
-	freetoken(cmd);
-	free(buffer);
+	freetoken(cmd, NULL, buffer);
 	exit(exit_status);
 }
