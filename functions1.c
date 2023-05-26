@@ -57,6 +57,8 @@ char **gettoks(char *str, char *deliminer)
 
 /**
  * freetoken - free token
+ * @path: path
+ * @buffer: buffer
  * @tok: string
  */
 

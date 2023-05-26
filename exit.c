@@ -1,14 +1,15 @@
 #include "shell.h"
 
 /**
- * _exit: exit shell
+ * _eexit - exit shell
  * @cmd: command
  * @buffer: buffer
+ * @path: path
  * @a: integer status
  * Return: void
  */
 
-void _eexit(char **cmd, char *buffer,char *path, int a)
+void _eexit(char **cmd, char *buffer, char *path, int a)
 {
 	int exit_status = a;
 
