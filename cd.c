@@ -19,10 +19,10 @@ int _cd(const char *path)
 	{
 		_setenv("PWD", cwd);
 		return (0);
-    }
+	}
 
-    perror("getcwd");
-    return -1;
+	perror("getcwd");
+	return (-1);
 }
 
 /**
@@ -32,12 +32,14 @@ int _cd(const char *path)
 void execd(char **cmd, char *buffer, char *path)
 {
 	(void)path;
-	if (cmd[1] == NULL || _strncmp("-", cmd[1], 1) == 0)
-                        {       char *home = _getenv("HOME");
 
-                                if (home != NULL)
-                                        _cd(home); }
-                        else
-                                _cd(cmd[1]);
-			freetoken(cmd, NULL, buffer);
+	if (cmd[1] == NULL || _strncmp("-", cmd[1], 1) == 0)
+		{
+			char *home = _getenv("HOME");
+
+	if (home != NULL)
+			_cd(home); }
+		else
+			_cd(cmd[1]);
+		freetoken(cmd, NULL, buffer);
 }
