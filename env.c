@@ -30,7 +30,7 @@ void _env(char **cmd, char *buffer, char *path, int a)
  * @name: path name
  * Return: environement or NULL
  */
-char *_getenv(char *name)
+/*char *_getenv(char *name)
 {
 	int length;
 	int i;
@@ -47,4 +47,4 @@ char *_getenv(char *name)
 			return (&environ[i][length] + 1);
 	}
 		return (NULL);
-}
+}*/
