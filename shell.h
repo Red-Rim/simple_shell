@@ -8,6 +8,7 @@
 #include <stddef.h>
 #include <sys/wait.h>
 #include <errno.h>
+#include <limits.h>
 
 #define MAX 9
 
@@ -36,4 +37,7 @@ void _eexit(char **cmd, char *buffer, char *path, int a);
 void argc(int argc, char *argv[]);
 int _isstrdigit(char *str);
 int _isdigit(int a);
+int _cd(const char *path);
+char *_getenv(const char *name);
+
 #endif
