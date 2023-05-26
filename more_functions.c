@@ -55,7 +55,7 @@ int _isdigit(int a)
 }
 
 /**
- * _isstrdigit: check if astring is digit
+ * _isstrdigit - check if astring is digit
  * @str: string to check
  * Return: 1 in success or 0
  */
