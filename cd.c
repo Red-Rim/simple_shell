@@ -26,7 +26,11 @@ int _cd(const char *path)
 }
 
 /**
- *
+ * execd - execute the cd commd to change the current working
+ * @cmd pointer to an array of string representing a commd& its arg
+ * @buffer: pointer to a character buffer
+ * @path: pointer to a character string representing a path
+ * Return: void
  *
  */
 void execd(char **cmd, char *buffer, char *path)
