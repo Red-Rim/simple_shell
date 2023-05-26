@@ -18,11 +18,19 @@ int _setenv(const char *name, const char *value)
 	return (0);
 }
 
+<<<<<<< HEAD
  /**
   * _unsetenv - unset env variable
   * @name: name of the env  varbl to unenv
   * Return: 0 on success, -1 on failure
   */
+=======
+/**
+ * _unsetenv - remove an env varbl
+ * @name: name of the env  varbl to unset
+ * Return: 0 on success, -1 on failure
+ */
+>>>>>>> 1bb051cc48e35aa4a986f07c6af53e47edfde330
 int _unsetenv(const char *name)
 {
 	int result;
