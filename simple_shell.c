@@ -3,11 +3,9 @@
  /*Red-Riml & Fatimazahraker*/
 /**
  * main - simlpe shell (UNIX command line interpreter)
- * @argc: number of command-line arguments
- * @argv: array of command-line argument strings
- * Return: return 0 if succes
+ *  Return: return 0 if succes
  */
-int main()
+int main(void)
 {	char *buffer = NULL, *path = NULL;
 	char **cmd = NULL;
 	int exc = 0;

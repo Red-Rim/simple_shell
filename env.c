@@ -25,13 +25,12 @@ void _env(char **cmd, char *buffer, char *path, int a)
 	freetoken(cmd, NULL, buffer);
 }
 
-/*------------------_getenv-------------------*/
 /**
  * _getenv - get environement of PATH
  * @name: path name
  * Return: environement or NULL
  */
-/*char *_getenv(char *name)
+char *_getenv(char *name)
 {
 	int length;
 	int i;
@@ -48,4 +47,4 @@ void _env(char **cmd, char *buffer, char *path, int a)
 			return (&environ[i][length] + 1);
 	}
 		return (NULL);
-}*/
+}
